@@ -1,0 +1,15 @@
+{
+  "name": "factory-stack",
+  "description": "The factory-stack plugin for Droid.",
+  "owner": {
+    "name": "Cynthia Toporowski"
+  },
+  "plugins": [
+    {
+      "name": "factory-stack",
+      "description": "Skills and one custom droid for verified, principled coding work in Droid.",
+      "source": "./plugins/factory-stack",
+      "category": "development"
+    }
+  ]
+}
