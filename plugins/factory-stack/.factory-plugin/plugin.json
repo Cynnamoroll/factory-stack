@@ -1,0 +1,12 @@
+{
+  "name": "factory-stack",
+  "description": "Skills and one custom droid for Droid: session rules, engineering principles, code explanation, review, verification, formal models, performance, and pull request workflows.",
+  "version": "0.1.0",
+  "author": {
+    "name": "Cynthia Toporowski"
+  },
+  "homepage": "https://github.com/Cynnamoroll/factory-stack",
+  "repository": "https://github.com/Cynnamoroll/factory-stack",
+  "license": "MIT",
+  "keywords": ["droid", "skills", "verification", "review", "tla"]
+}
