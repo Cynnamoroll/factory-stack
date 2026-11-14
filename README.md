@@ -61,6 +61,19 @@ To enable the plugin for a whole team, add the marketplace to `extraKnownMarketp
 
 A project skill with the same name as a factory-stack skill takes precedence over it. An organization plugin skill takes precedence over both.
 
+### Update
+
+Refresh the marketplace, then update the installed plugin:
+
+```sh
+droid plugin marketplace update factory-stack
+droid plugin update factory-stack@factory-stack --scope user
+```
+
+Use `--scope project` for a project installation. If the marketplace name differs, find it with `droid plugin marketplace list` and use it in the first command and after `@` in the second.
+
+Start a new Droid session to load the updated skills.
+
 ## How to use the skills
 
 ### Invoke a skill yourself
