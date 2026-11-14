@@ -1,17 +1,17 @@
 ---
 name: maintain-tla-model
-description: "Update existing TLA+ models so they stay in step with the code, then run tla-check. Use after commits touch code a model covers; not to write the first model (use create-tla-model) or only to run the checker on unchanged models (use tla-check)."
+description: "Update TLA+ models after changes to covered code, then run tla-check. Use create-tla-model for first models or tla-check to check unchanged models."
 license: MIT
 compatibility: droid
 ---
 
 # Maintain TLA model
 
-When code changes and its model does not, the check keeps passing on code that no longer exists. That pass is the dangerous case, because it looks like proof. This skill brings models back in step.
+Sync models to current code. A stale model's pass does not verify changed code.
 
 ## Edit scope
 
-Edit only models, configs, and `COVERAGE.md`. Never edit product code unless the user asks. When a rule fails on the current code, report it. Do not weaken the rule or the model to make it pass.
+Edit only models, configs, and `COVERAGE.md`, unless the user requests product edits. Report failed rules without weakening them or the model.
 
 ## Pass
 
@@ -22,7 +22,7 @@ Edit only models, configs, and `COVERAGE.md`. Never edit product code unless the
    - **Model drift.** An atomic step became two, a branch appeared, a check moved, or a value range changed. The model must change.
    - **Intended promise change.** The docs, tests, or commit message say the promise changed. The rule changes, and you cite the evidence.
    - **Possible break.** The code changed and nothing says the promise did. A failure that follows is a bug candidate.
-4. **Update from the code.** Rewrite the changed parts so each again points to real code, before rerunning. Do not shape the model by what makes it pass. Keep bounds unless the change makes them wrong, and report any bound you reduce.
+4. **Update from the code.** Make changed parts match real code before rerunning, not a desired pass. Keep bounds unless incorrect, and report every reduced bound.
 5. **Rerun and judge.** Run `tla-check`.
    - On a pass, break the new code's guard in the model and confirm the check catches it, then revert.
    - On a violation, replay the trace against the real code step by step. A step that cannot happen means the model is wrong, so fix it. If every step can happen, it is a bug. Name the commit that introduced it and state the harm in one sentence.

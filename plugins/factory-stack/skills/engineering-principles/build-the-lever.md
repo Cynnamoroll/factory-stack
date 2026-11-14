@@ -2,8 +2,6 @@
 
 Apply to any non-trivial work, not just bulk work: edits, migrations, analyses, checks. Build the tool that does it or proves it (codemod, script, generator, or a skill your subagents follow) instead of working by hand. The tool is the artifact a reviewer can rerun.
 
-When the work isn't trivial, build the tool that does it instead of doing it by hand.
-
 A codemod, generator, or script does the work the same way every time and reruns for free. The tool is one artifact a reviewer can read and rerun to check the work. Hand-done changes can only be re-verified by redoing them. A deterministic script turns "trust me" into "run this".
 
 Default to building the lever. Skip it only when the task is trivial, a couple of obvious edits you can see at a glance.

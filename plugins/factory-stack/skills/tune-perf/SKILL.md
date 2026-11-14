@@ -1,17 +1,17 @@
 ---
 name: tune-perf
-description: "Measure, vet the number with vet-measurement, change one thing, and measure again. Use for slowdowns, perf regressions, and metric hill-climbs; not for correctness bugs (use fix-bug), unmeasured refactors, or vetting a number on its own (use vet-measurement)."
+description: "Measure, run vet-measurement, change one thing, and remeasure slowdowns, performance regressions, or metric climbs. Use fix-bug for correctness or vet-measurement for numbers alone; not for unmeasured refactors."
 license: MIT
 compatibility: droid
 ---
 
 # Tune perf
 
-Tie every change to a measurement. Do not read source in place of measuring. One change, one measurement, keep or revert.
+Measure every change rather than relying on source inspection. Keep or revert each change.
 
 ## 1. Fix the target
 
-Pick a workload that reproduces the user's complaint, one metric, the direction that counts as better, and a stop predicate that pairs a target with a minimum number of attempts, such as "at least 30% faster than baseline and at least 5 attempts." Use the user's numbers when given.
+Pick a reproducing workload, one metric, improvement direction, and a stop predicate combining target and minimum attempts, such as "at least 30% faster than baseline and at least 5 attempts." Use the user's numbers.
 
 ## 2. Build and vet the harness
 
@@ -33,7 +33,7 @@ Order hypotheses cheapest first:
 6. Do it concurrently.
 7. Do it cheaper.
 
-For each hypothesis, name the mechanism ("defer X off startup because it blocks first paint"), make the one change, rerun the frozen harness and the tests, and keep it only when the metric moves past the noise and the tests stay green. Otherwise revert it fully. Commit each kept change on its own with `git add <files>`. Log each attempt as a row in `/tmp/<slug>-decisions.tsv` (hypothesis, change, before, after, verdict).
+For each hypothesis, name the mechanism ("defer X off startup because it blocks first paint"), change one thing, and rerun the frozen harness and tests. Keep only gains beyond noise with green tests; otherwise revert fully. Commit each kept change separately with `git add <files>`. Log each attempt in `/tmp/<slug>-decisions.tsv` (hypothesis, change, before, after, verdict).
 
 When several independent hypotheses are live, run them in parallel as `droid exec -m auto --auto medium --worktree perf-<n>` and measure each in its own worktree.
 

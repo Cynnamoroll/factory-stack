@@ -1,6 +1,6 @@
 ---
 name: engineering-principles
-description: "Apply the engineering principle that settles a coding or review decision, reading only the files that apply. Use when a choice needs a named principle such as fix root causes or explain the number; not for always-on repository rules (use AGENTS.md) and not to run a verification procedure (use prove-it-works or vet-measurement)."
+description: "Apply named principles to coding or review decisions, such as fix root causes or explain the number. Read only relevant files; use AGENTS.md for repository rules, prove-it-works or vet-measurement for verification procedures."
 license: MIT
 compatibility: droid
 user-invocable: false
@@ -12,7 +12,7 @@ allowed-tools:
 
 # Engineering principles
 
-Each principle is one file beside this one. Read the whole file for any principle you apply, then name it in your reply with the choice it changed. Cite only principles you read this session. Do not load all of them.
+Read each applied principle's whole file, then name the decision it changed in your reply. Load only relevant principles and cite only those read this session.
 
 ## Core
 

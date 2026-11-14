@@ -1,19 +1,17 @@
 ---
 name: check-blast-radius
-description: "Find what a change could break outside the changed lines and prove the one failure with a repro or test. Use when the question is fallout beyond the diff; not for a multi-angle attack on the diff itself (use adversarial-review) or a routine review pass (use /review)."
+description: "Find breakage outside the diff and prove it with a repro or test. Use for fallout beyond changed lines; use adversarial-review to attack the diff itself or /review for routine review."
 license: MIT
 compatibility: droid
 ---
 
 # Check blast radius
 
-Find what a change breaks somewhere else before it ships. Listing callers is not the job, because `rg` does that in a second. The job is the breakage a symbol search will not show.
-
-A writeup that sounds right is worthless, because it reads as convincing whether or not it is true. Find the one or two facts the change's safety rests on and prove them by running code.
+Find breakage a caller search misses. Identify the one or two facts the change's safety depends on and prove them by running code.
 
 ## Evidence ladder
 
-Take each load-bearing fact as far down this list as is cheap, and say where it stopped.
+Take each safety fact as far down this list as is cheap. Report where it stopped.
 
 1. You said so. Worthless alone.
 2. You pointed at the line: a real `file:line`, or the dependency's own source.
@@ -24,7 +22,7 @@ Take each load-bearing fact as far down this list as is cheap, and say where it 
 ## Steps
 
 1. **Read the change.** The diff, the symbols it adds, changes, and deletes, and what it now does differently, including what the diff does not spell out.
-2. **Find the safety fact.** Most risky-looking changes are safe because of one fact, such as "this call only drops cache entries that are already dead." If it holds, most risks clear at once. Spend your time here.
+2. **Find the safety fact.** For example, "this call only drops cache entries that are already dead." Prove the fact that clears the most risks.
 3. **Look where search stops.** Issue `explorer` Tasks in one message, one per outside surface. Typical surfaces are the pinned version and local patches of a dependency you call, timing (teardown, async ordering, retries), serialized data (API responses, DB columns, wire formats, another language reading the same bytes), feature flags, and code several hops downstream.
 4. **Grade each risk.** Give it a real likelihood and a real cost. Keep the confirmed risks. List the checked-and-cleared ones separately. Cite a real `file:line`. A search that finds nothing is an answer. Never invent a caller or an API.
 5. **Prove it.** Write a script or test that runs the real code against the safety fact or the worst risk, run it, and paste the output. Put a throwaway probe under `/tmp/`. Add a test to the repo only when it is worth keeping as a regression test, and say so.

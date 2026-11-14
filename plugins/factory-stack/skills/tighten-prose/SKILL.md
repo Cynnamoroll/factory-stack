@@ -1,13 +1,13 @@
 ---
 name: tighten-prose
-description: "Edit prose to cut filler, hedging, and stock phrasing, and apply technical-writing rules to docs. Use on text people will read (READMEs, docs, PR descriptions, commit messages, comments); not for a reuse, quality, and efficiency code review (use simplify)."
+description: "Cut filler, hedging, and stock phrasing while applying technical-writing rules. Use for READMEs, docs, PRs, commits, and comments; use simplify for code reuse, quality, and efficiency."
 license: MIT
 compatibility: droid
 ---
 
 # Tighten prose
 
-Scan the text for the patterns below and rewrite. Keep the meaning and the intended tone. For docs, READMEs, RFCs, PR descriptions, and commit messages, also apply [references/technical-writing.md](references/technical-writing.md).
+Rewrite these patterns without changing meaning or tone. For docs, READMEs, RFCs, PR descriptions, and commit messages, apply [references/technical-writing.md](references/technical-writing.md).
 
 ## Patterns
 
@@ -28,7 +28,7 @@ Scan the text for the patterns below and rewrite. Keep the meaning and the inten
 - No em dashes. Use a period or a comma.
 - A colon only before a list or an example, not as a connector.
 - Bold only where a reader scans for it.
-- No bold label that restates its line ("**Performance:** Performance improved"). A bold lead-in that names the item and ends in a period is fine.
+- Cut bold labels that repeat the line ("**Performance:** Performance improved"). A bold item name ending in a period is fine.
 - Sentence-case headings. No decorative emoji. Straight quotes.
 
 **Chat residue**
@@ -49,4 +49,4 @@ Scan the text for the patterns below and rewrite. Keep the meaning and the inten
 
 ## Done when
 
-Every pattern above is absent from the edited text, the meaning is unchanged, and code identifiers, commands, and quoted output are untouched. Report what you changed in one or two lines, not a diff recital.
+All listed patterns are absent. Meaning, code identifiers, commands, and quoted output are unchanged. Report the changes in one or two lines.

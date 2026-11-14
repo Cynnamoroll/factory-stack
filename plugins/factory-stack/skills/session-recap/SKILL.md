@@ -1,6 +1,6 @@
 ---
 name: session-recap
-description: "Summarize what changed since the user's last message, or across past sessions found with droid search: files touched, decisions made, and what is waiting on the user. Use when coming back to a session or picking up earlier work; not for searching, listing, or resuming sessions (use droid search, droid resume, or session-navigation)."
+description: "Recap changes, files, decisions, and pending user calls since the last message or across past sessions. Use when returning to work; use droid search, droid resume, or session-navigation to find, list, or resume sessions."
 license: MIT
 compatibility: droid
 allowed-tools:
@@ -12,7 +12,7 @@ allowed-tools:
 
 # Session recap
 
-Catch the user up and lay out every call waiting on them, so they can decide from your reply alone. Assume they remember their last message and nothing after it. This turn is read-only: change no code, start no job, post nothing.
+Recap every pending user call so the reply alone supports a decision. Assume they remember only their last message. Stay read-only, with no jobs or external posts.
 
 ## 1. Gather
 
@@ -21,7 +21,7 @@ Catch the user up and lay out every call waiting on them, so they can decide fro
 
 Check each number you will show against its source.
 
-An action item is a call only the user can make: a product choice, an approval, an irreversible step, or access you lack. Work you can still do yourself is not an action item. Never invent one.
+Action items are user-only calls (product choices, approvals, irreversible steps, missing access), not work you can do. Never invent one.
 
 ## 2. Write
 

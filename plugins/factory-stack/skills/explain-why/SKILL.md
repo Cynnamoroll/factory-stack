@@ -1,17 +1,17 @@
 ---
 name: explain-why
-description: "Explain why code is the way it is from git history, PRs, issues, and connected MCP sources, citing each claim. Use for design rationale, regressions, and postmortems; not for how code works now (use explain-how) or local session history (use droid search)."
+description: "Explain code rationale from git, PRs, issues, and connected MCP sources with citations. Use for design rationale, regressions, and postmortems; use explain-how for current behavior or droid search for session history."
 license: MIT
 compatibility: droid
 ---
 
 # Explain why
 
-Code shows what it does, not why it exists. The reasons live in commits, PRs, tickets, docs, chat, and incident data, all incomplete. Investigate like a careful historian. Separate what the record says from what you infer. Read [references/epistemics.md](references/epistemics.md) before writing the answer.
+Trace reasons through incomplete commits, PRs, tickets, docs, chat, and incident data. Separate records from inference. Read [references/epistemics.md](references/epistemics.md) before answering.
 
 ## 1. Pin the target and the question
 
-The target is code, a pattern, or a named decision. The question is a rationale, a tradeoff, an edge case, an external constraint, dead code, or a history sweep. If the target is vague, state your best reading from the conversation and continue.
+Name the code, pattern, or decision and the question (rationale, tradeoff, edge case, external constraint, dead code, or history sweep). If vague, state your best reading and continue.
 
 ## 2. Build the code anchor yourself
 
@@ -33,7 +33,7 @@ Skip a category only with a written reason that goes in the answer: no MCP serve
 
 ## 4. Synthesize
 
-Weigh the reports yourself. Merge duplicate citations, keep contradictions visible, spot-check any citation you doubt, and place every claim in one confidence tier. Write the answer in the shape of [references/answer-format.md](references/answer-format.md).
+Weigh reports, merge duplicate citations, expose contradictions, check doubtful citations, and assign every claim a confidence tier. Follow [references/answer-format.md](references/answer-format.md).
 
 If the question precedes a change, end with a constraint set for the change: what to preserve, what to change, what to avoid, and the risk.
 

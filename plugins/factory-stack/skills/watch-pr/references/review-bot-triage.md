@@ -1,6 +1,6 @@
 # Review-bot triage
 
-Review bots catch real bugs and also file noise. Classify each thread before acting. Do not treat every comment as a required change, and do not ignore a bot by default.
+Classify each thread before acting. Neither require every suggested change nor ignore bots by default.
 
 ## Calls
 
@@ -8,7 +8,7 @@ Review bots catch real bugs and also file noise. Classify each thread before act
 - **dismiss.** The comment matches a low-risk pattern below and the current code proves no change is needed. Reply with the concrete reason and resolve.
 - **ask.** The comment is novel, high-severity, touches security or data, or is ambiguous. Ask the user.
 
-When in doubt, ask. Skipping a noisy style comment is cheap. Skipping a real data bug is not.
+When in doubt, ask.
 
 ## Never auto-dismiss
 

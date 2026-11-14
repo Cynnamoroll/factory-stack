@@ -1,6 +1,6 @@
 ---
 name: race-worktrees
-description: "Run one task as several independent droid exec candidates in separate worktrees, pick the best result, and graft the strongest parts of the others into it. Use when a change has several plausible designs; not for multi-feature orchestration (use Missions) or a single plan (use Spec mode)."
+description: "Race independent droid exec candidates in separate worktrees and combine their strongest parts. Use for competing designs; use Missions for multiple features or Spec mode for one plan."
 license: MIT
 compatibility: droid
 disable-model-invocation: true
@@ -8,11 +8,11 @@ disable-model-invocation: true
 
 # Race worktrees
 
-Several candidates attempt the same task in isolation. You pick a base and fold in what the others did better. Open a todo list with one item per phase before launching anything.
+Race isolated candidates, pick a base, and graft their best parts. Before launching, open a todo list with one item per phase.
 
 ## 1. Frame
 
-Every candidate gets the same prompt, so the prompt is the contract.
+Give every candidate the same prompt.
 
 1. State the artifact each candidate produces.
 2. Write a rubric of 3 to 6 gradeable criteria for this task. Candidates do not see it.
@@ -41,7 +41,7 @@ Issue one `explorer` Task as the judge. Give it the rubric and each worktree pat
 
 ## 4. Pick a base
 
-Score each candidate against the rubric criterion by criterion. Agreement with the judge confirms the pick. Disagreement means a bias or an unclear rubric, so read both rationales before deciding. Prefer the base the next maintainer can extend without breaking invariants. On a tie, take the smaller interface.
+Score every candidate on every criterion. Agreement with the judge confirms the pick; otherwise read both rationales for bias or an unclear rubric. Prefer a base maintainers can extend without breaking invariants. Break ties with the smaller interface.
 
 ## 5. Graft
 

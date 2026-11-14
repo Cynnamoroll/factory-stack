@@ -1,6 +1,6 @@
 ---
 name: create-verify-skill
-description: "Create a project verify-<app> skill that drives the running app the way a user does, with agent-browser for web apps and tuistory for terminal apps. Use when a project has no verify skill yet; not to refresh a drifted one (use maintain-verify-skill), not to draft a generic skill (use /create-skill), and not for a one-shot drive of the app (use agent-browser or tuistory)."
+description: "Create a missing project verify-<app> skill using agent-browser for web apps or tuistory for terminal apps. Use maintain-verify-skill for drift, /create-skill for generic skills, or agent-browser or tuistory for a one-time drive."
 license: MIT
 compatibility: droid
 disable-model-invocation: true
@@ -8,11 +8,11 @@ disable-model-invocation: true
 
 # Create verify skill
 
-Generate `.factory/skills/verify-<app>/` in the project: a scripted way to launch the real app, drive a feature the way a user would, and capture evidence. Write it for the next agent, who will read it cold in the middle of a task and has never seen the app.
+Generate `.factory/skills/verify-<app>/` to launch the real app, drive a user's feature path, and capture evidence. Assume the next agent has never seen the app.
 
 ## 1. Interview the repo
 
-Answer these from the code. Ask the user only what you cannot observe.
+Answer from code. Ask only what you cannot observe.
 
 - **Surface.** What does a user touch: a web UI, a CLI or TUI, a desktop app, an API, a library? Pick the primary one and note the rest.
 - **Run.** The repo's own dev command (package scripts, Makefile, README), ports, env vars, seed data, auth.
@@ -24,7 +24,7 @@ If the checkout does not build or start, fix that or report it precisely before 
 
 ## 2. Write the skill
 
-Write `.factory/skills/verify-<app>/SKILL.md` with `name: verify-<app>` and a description that names the app, the surface, and when to use it. Fill these sections from what the interview found, with no placeholders left:
+Write `.factory/skills/verify-<app>/SKILL.md` with `name: verify-<app>` and a description naming the app, surface, and trigger. Fill all sections from the interview, without placeholders:
 
 - **Launch.** The exact command, how to tell it is ready to use (not just that a port answers), and teardown. Launch works from an empty data dir, including migrations and seed data. A short-lived CLI builds once, then runs each drive in its own PTY session.
 - **Doctor.** One read-only check: process up, right build, port owned by this run, auth valid. Run it first whenever anything looks off.
