@@ -1,10 +1,10 @@
 # Epistemics
 
-How to grade confidence when the evidence is historical and partial, and how to say it without false certainty.
+Grade historical, partial evidence without false certainty.
 
 ## Confidence tiers
 
-Every claim sits in one tier. The tier sets its section and its wording.
+Every claim has one tier, which sets its section and wording.
 
 1. **Direct.** An author wrote the reason down: a PR body, a ticket, a code comment, a design doc, a chat message from the author. Wording is plain and cited. "This exists because X (PR #123)."
 2. **Supported.** Several indirect items point the same way, and none states it outright. Wording is confident but shows each item. "The evidence points to X: the PR title, the `perf` label, and three commits on the same hot path."

@@ -1,19 +1,19 @@
 ---
 name: dev-workflow
-description: "Set autonomy, reply, comment, and fan-out rules for this coding session. Use at the start of a coding task; not for always-on repository conventions (use AGENTS.md) and not for a specific workflow such as fixing a bug or shipping a PR (use that skill)."
+description: "Set session autonomy, reply, comment, and fan-out rules at the start of coding. Use AGENTS.md for repository conventions and a task-specific skill for workflows such as fixing bugs or shipping PRs."
 license: MIT
 compatibility: droid
 ---
 
 # Dev workflow
 
-Session rules for a coding task. `AGENTS.md` holds the repository's commands and conventions. This skill holds how you work.
+Session rules. Keep repository commands and conventions in `AGENTS.md`.
 
 ## Non-negotiables
 
-- In your first message, restate the user's goal, the problem behind it, and the smallest change you expect to meet it. Do not wait for confirmation. If the evidence rules out the change they asked for, show it and stop.
+- First message, restate the goal, underlying problem, and smallest expected change. Proceed without confirmation unless evidence rules out the request. Then show it and stop.
 - Name the data shape before writing code. Load `engineering-principles` when a decision needs a principle, and name each principle you applied with the choice it changed.
-- A question whose answer you could observe by running something (behavior, timing, layout, output) is not the user's to answer. Run the experiment. Ask only for product or preference calls no experiment can settle.
+- Run experiments to answer observable questions (behavior, timing, layout, output). Ask only for product or preference calls experiments cannot settle.
 - Use Spec mode to plan non-trivial changes. Do not write your own plan-approval loop.
 - Before calling work done, run `prove-it-works`.
 
@@ -30,8 +30,8 @@ Session rules for a coding task. `AGENTS.md` holds the repository's commands and
 - A delegate that writes code is one `principled-worker` Task. In-session subagents share one working folder, so never run two writing Tasks on overlapping files.
 - Several writers at once run as `droid exec -m auto --worktree <name> --auto medium "<brief>"`, one worktree each.
 - Subagents cannot start subagents. Fan-out happens from the main session only.
-- You own every subagent's output. Read its diff or evidence and write your own summary. Do not pass its report through.
-- New work goes to a fresh Task with consolidated scope (the original brief, later directives, the prior report). Resume an existing Task only when it holds state that is costly to move.
+- Review every subagent's diff or evidence and write your own summary, not a forwarded report.
+- Start a fresh Task with consolidated scope (original brief, later directives, prior report). Resume only when moving its state would be costly.
 - Inside a Mission, the validators are the review. Workers skip review fan-out but still run `prove-it-works`.
 
 ## Tokens
@@ -51,7 +51,7 @@ Session rules for a coding task. `AGENTS.md` holds the repository's commands and
 
 ## Comments
 
-Keep a comment only for a non-obvious reason the code cannot show. No comments that narrate steps. In a test or verify script, the assertion message documents the step. This applies to every file you or a delegate write.
+In every file you or a delegate write, comment only on non-obvious reasons the code cannot show. Use assertion messages to document test or verification steps.
 
 ## Done when
 

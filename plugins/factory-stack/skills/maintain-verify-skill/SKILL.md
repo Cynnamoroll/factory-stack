@@ -1,17 +1,17 @@
 ---
 name: maintain-verify-skill
-description: "Refresh an existing project verify-<app> skill so it still drives the running app the way a user does. Use when features changed and the verify skill has drifted; not to create the first verify skill (use create-verify-skill) and not for a one-shot drive (use agent-browser or tuistory)."
+description: "Refresh a drifted project verify-<app> skill after feature changes. Use create-verify-skill for the first skill, or agent-browser or tuistory for a one-time drive."
 license: MIT
 compatibility: droid
 ---
 
 # Maintain verify skill
 
-A feature map rots when the app changes. This is the upkeep pass. The unit of rigor is the feature: cover every feature file from source and drive every feature live.
+Check every feature file against source and drive every feature live.
 
 ## Edit scope
 
-Edit only the verify skill's own directory: its `SKILL.md`, `features/`, and the scripts it owns. Never edit product code. Behavior the map describes that the app no longer has is either doc drift (fix the map) or a product regression (report it).
+Edit only the verify skill's directory (`SKILL.md`, `features/`, and owned scripts). Report product regressions without editing product code. Fix map descriptions that drifted from intended behavior.
 
 ## Pass
 

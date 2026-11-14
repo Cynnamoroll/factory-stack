@@ -1,13 +1,13 @@
 ---
 name: build-feature
-description: "Design in Spec mode, build, and verify in the running app with prove-it-works. Use for new features, prototypes, and visual-parity work; not for plan-only work (use Spec mode alone) or large refactors, migrations, or dependency upgrades (use refactoring-playbook)."
+description: "Design in Spec mode, build, and verify with prove-it-works. Use for features, prototypes, and visual parity; use Spec mode alone for plans, or refactoring-playbook for large refactors, migrations, and dependency upgrades."
 license: MIT
 compatibility: droid
 ---
 
 # Build feature
 
-You own the design. Delegate the typing, keep the review.
+Own the design and review. Delegate implementation.
 
 ## 1. Ground and design
 
@@ -17,7 +17,7 @@ You own the design. Delegate the typing, keep the review.
 
 ## 2. Plan the work
 
-Write four todo items. Keep an item that does not apply, marked `n/a: <reason>`.
+Write four todo items, marking any inapplicable item `n/a: <reason>`.
 
 - **Blocking first steps.** What must land before anything else.
 - **Independent workstreams.** Disjoint files or layers that can run in parallel.
@@ -26,7 +26,7 @@ Write four todo items. Keep an item that does not apply, marked `n/a: <reason>`.
 
 ## 3. Build
 
-Delegate each workstream to one `principled-worker` Task with file paths, the named data shape, and success criteria. Parallel writers on separate files run as `droid exec -m auto --auto medium --worktree <name>`. Review every diff. Commit in small, ordered units, each verified before the next.
+Give each workstream to one `principled-worker` Task with file paths, data shape, and success criteria. Parallel writers on separate files use `droid exec -m auto --auto medium --worktree <name>`. Review every diff. Verify each small, ordered commit before the next.
 
 ## 4. Verify
 

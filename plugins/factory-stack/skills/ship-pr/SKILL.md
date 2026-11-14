@@ -1,6 +1,6 @@
 ---
 name: ship-pr
-description: "Verify each PR in its own worktree with prove-it-works, run simplify on the diff, and open the PR with gh. Use when work is done and ready for review; not for a bare gh pr create when no isolated verify and simplify pass is needed, and not to watch an already-open PR (use watch-pr)."
+description: "Verify each PR in an isolated worktree, run simplify, and open it with gh. Use for completed work ready for review; use bare gh pr create if those passes are unnecessary, or watch-pr for an open PR."
 license: MIT
 compatibility: droid
 disable-model-invocation: true
@@ -8,7 +8,7 @@ disable-model-invocation: true
 
 # Ship PR
 
-Open PRs that a reviewer can trust: each one verified by a run that did not write the code, cleaned up, and described in one minute of reading.
+Open cleaned-up PRs, independently verified and described in one minute of reading.
 
 ## 1. Shape the commits
 
@@ -18,16 +18,16 @@ A stack is a chain of base branches. The bottom PR targets the default branch, a
 
 ## 2. Verify each PR independently
 
-For each PR branch, start a fresh run in its own worktree so the verdict does not come from the session that wrote the code:
+Verify each PR branch in a fresh run and worktree, separate from its author:
 
 ```sh
 droid exec -m auto --auto medium --worktree "verify-<branch>" -o json \
 	"Check out <branch>. Run /prove-it-works on the change between <base> and <branch>. End with PASS, PASS+NOTES, or FAIL and the evidence."
 ```
 
-Run several at once with `&` and `wait`. Green CI and a bot approval are not verdicts, because neither runs the change the way a user would. A FAIL goes back to the author step. Do not open that PR.
+Run several with `&` and `wait`. CI and bot approval do not replace a user-path run. Return a FAIL to the author; do not open that PR.
 
-Record the verdict's commit. Before trusting a verdict after a rebase, compare `git diff <base>...<verdict-sha> | git patch-id --stable` with the same for the current head. Different patch IDs mean a fresh verification.
+Record the verified commit. After a rebase, compare `git diff <base>...<verdict-sha> | git patch-id --stable` with the current head's patch ID. Reverify if they differ.
 
 If `droid exec` fails on authentication, ask the user to export `FACTORY_API_KEY` in their shell. Never write a key to a file.
 

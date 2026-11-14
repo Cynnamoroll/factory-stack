@@ -1,13 +1,13 @@
 ---
 name: vet-measurement
-description: "Vet a measurement or benchmark before you trust, report, or act on it: the limiter, tuning, limits, errors, repeatability, and relevance. Use when a number will drive a decision, including from tune-perf; not for skill or prompt eval loops (use eval-runs or eval-hillclimb) and not to apply the perf change itself (use tune-perf)."
+description: "Vet a decision-driving measurement's limiter, tuning, limits, errors, repeatability, and relevance, including within tune-perf. Use before trusting, reporting, or acting; use eval-runs or eval-hillclimb for skill or prompt evals, or tune-perf to change performance."
 license: MIT
 compatibility: droid
 ---
 
 # Vet measurement
 
-A number that drives a decision needs evidence that it measured the work you think it did. Answer each question in [references/benchmark-checklist.md](references/benchmark-checklist.md) with evidence from a run, not a guess from reading code.
+Answer every question in [references/benchmark-checklist.md](references/benchmark-checklist.md) with run evidence, not source-based guesses.
 
 ## Steps
 
@@ -17,7 +17,7 @@ A number that drives a decision needs evidence that it measured the work you thi
 4. **Answer the seven questions** in the checklist. Add an error count or a work count to the script if it lacks one.
 5. **Give the verdict:** faster, slower, no measurable difference, or inconclusive.
 
-A quick ballpark the user asked for needs one run, plus questions 4 and 7, and the report says it is one run. A choice between options is never a ballpark.
+A requested ballpark needs one run and questions 4 and 7. Report the single run. Choosing between options is never a ballpark.
 
 ## Done when
 

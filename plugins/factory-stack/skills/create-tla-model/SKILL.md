@@ -1,17 +1,17 @@
 ---
 name: create-tla-model
-description: "Write TLA+ models of a system's stateful parts (flows, protocols, state machines). Use when starting formal models for behavior tests rarely cover; not to re-check existing models (use tla-check) or to update models after code changes (use maintain-tla-model)."
+description: "Model stateful flows, protocols, and state machines in TLA+. Use for new formal models of behavior tests rarely cover; use tla-check to re-check models or maintain-tla-model after code changes."
 license: MIT
 compatibility: droid
 ---
 
 # Create TLA model
 
-A test checks the cases someone thought of. A model checker checks every order of steps inside the model's bounds. Find the part of the repo where that matters most, model it, and leave a record the next agent can use to keep it honest.
+Model the code where checking every step ordering within bounds matters most. Record enough for the next agent to keep the model accurate.
 
 ## 1. Choose the target from the code
 
-Start where the user pointed, if they did. Otherwise pick the strongest target, not the easiest: a promise the code makes, where a break harms users and tests rarely reach the bad case. Typical targets are retries and idempotency, locks and leases, multi-step flows with cancel or timeout, and protocol handshakes.
+Use the user's target, otherwise the strongest code promise whose failure harms users and tests rarely reach. Candidates include retries, idempotency, locks, leases, multi-step flows with cancel or timeout, and handshakes.
 
 TLA+ answers "can these events happen in a bad order?" If the question is "does this function behave for every input" (overflow, memory safety, a data-structure invariant), TLA+ is the wrong tool. Say so and recommend a verifier that runs on the code or property-based tests instead.
 
@@ -27,7 +27,7 @@ Put it in the project, for example `specs/tla/<Area>/<Area>.tla` with `<Area>.cf
 
 ## 3. Show it can fail
 
-Run `tla-check` on the model. Then break the model the way the code could break (remove a guard, split an atomic step) and confirm `tla-check` catches it. Revert the break. A rule you have never seen fail proves nothing.
+Run `tla-check`. Break the model as the code could break (remove a guard, split an atomic step), confirm `tla-check` catches it, and revert the break.
 
 If the current model of the current code breaks a rule, that is a finding. Report it with the counterexample in the code's words. Do not change product code unless the user asks.
 

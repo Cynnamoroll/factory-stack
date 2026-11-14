@@ -2,8 +2,6 @@
 
 Apply when product, UX, or feature-scope tradeoffs come up. Choose user delight over implementation convenience; ship fewer polished features over more rough ones.
 
-When implementation convenience conflicts with user delight, choose delight.
-
 - Every feature, control, and option must be justified
 - Ship less, ship better (polished experience with three features beats rough one with ten)
 - Prototype before committing (design decisions are cheaper in throwaway HTML than production code)

@@ -1,13 +1,13 @@
 ---
 name: tla-check
-description: "Check existing TLA+ models with TLC, render the state diagram, and report violations. Use to verify a model or when asked to run the checker; not to author or revise models (use create-tla-model or maintain-tla-model), and not for skill or prompt eval (use eval-runs or eval-hillclimb)."
+description: "Check existing TLA+ models with TLC, render states, and report violations. Use to verify models or run the checker; use create-tla-model or maintain-tla-model for edits, or eval-runs or eval-hillclimb for skill or prompt evals."
 license: MIT
 compatibility: droid
 ---
 
 # TLA check
 
-Run the checker on a model that already exists, show how the system moves between states, and report each broken rule in the code's own words.
+Check an existing model, show state transitions, and describe broken rules in the code's words.
 
 ## Run
 
@@ -17,7 +17,7 @@ Run the checker on a model that already exists, show how the system moves betwee
 
 The script needs Java 11 or later and Python 3. On first run it downloads a pinned `tla2tools.jar` to `~/.cache/factory-stack/` (set `TLA2TOOLS_JAR` to use your own). It runs SANY, then TLC with one worker, and writes `sany.out`, `tlc.out`, `states.dot`, `chart.mmd`, and `summary.txt` to the output directory, outside the repo by default. Exit code 0 is a pass, 1 is a violation or deadlock, and 2 is a parse or checker error.
 
-`chart.mmd` is written only when TLC finds at most 200 distinct states (`TLA_CHART_LIMIT` changes it). For a larger model, shrink the constants or add a `CONSTRAINT` to see the graph. The check itself still covers every state.
+`chart.mmd` requires at most 200 distinct states (`TLA_CHART_LIMIT` changes it). For larger models, shrink constants or add a `CONSTRAINT` to view the graph. The check still covers every state.
 
 ## Read the result
 
@@ -29,7 +29,7 @@ The script needs Java 11 or later and Python 3. On first run it downloads a pinn
 
 ## Replay against the code
 
-When the model describes real code, replay each counterexample against it, as a test or a live repro, one step per action. If a step cannot happen in the code, the model is wrong, so report a modeling error, not a bug. If every step can happen, it is a bug.
+Replay each counterexample against real code as a test or live repro, one step per action. An impossible step is a modeling error; if every step can happen, report a bug.
 
 ## Done when
 

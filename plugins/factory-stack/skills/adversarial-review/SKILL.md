@@ -1,17 +1,17 @@
 ---
 name: adversarial-review
-description: "Attack a diff with parallel read-only reviewers, one angle each, and verify every finding before reporting it. Use before merging a risky change; not for a routine pass (use /review), a reuse, quality, and efficiency sweep (use simplify), or fallout outside the changed lines (use check-blast-radius)."
+description: "Attack a risky diff with parallel read-only reviewers and verify every finding. Use before merging; use /review for routine review, simplify for reuse, quality, and efficiency, or check-blast-radius for fallout outside the diff."
 license: MIT
 compatibility: droid
 ---
 
 # Adversarial review
 
-Reviewers try to break a change. A finding survives only when a run proves it. Report findings. Do not apply fixes.
+Report only failures proved by a run. This review does not apply fixes.
 
 ## 1. Frame
 
-The scope is what the user names. Otherwise it is the branch diff from its merge base with the default branch, plus uncommitted changes (`git diff $(git merge-base HEAD origin/HEAD)`). Restate the intent in your own words from the user's message, the commits, and the PR body. Ask only if the intent cannot be read from those.
+Use the named scope, otherwise the branch diff from the default branch's merge base plus uncommitted changes (`git diff $(git merge-base HEAD origin/HEAD)`). Restate intent from the user's message, commits, and PR body. Ask only if those leave intent unclear.
 
 ## 2. Pick angles
 
@@ -33,7 +33,7 @@ Issue one `explorer` Task per angle, all in one message. Give each the scope com
 
 Run each proposed command or test yourself, in a scratch directory outside the repo (`/tmp/adv-<slug>/`). Keep a finding when the output shows the failure and the failure breaks the intent. Drop the rest. Merge findings that share a root cause. Delete the scratch directory when done.
 
-Every reviewer's verified findings stay in the verdict. Reviewers find different failures, so there is no winner to pick.
+Keep every reviewer's verified findings. Do not pick a winning reviewer.
 
 ## Done when
 

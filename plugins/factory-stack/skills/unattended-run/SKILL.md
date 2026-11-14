@@ -1,6 +1,6 @@
 ---
 name: unattended-run
-description: "Run long work with nobody watching, using Loop to wake, a decision log, and wip: commits with a resume note so the run can stop safely. Use when the user hands off a task and steps away; not for multi-feature orchestration (use Missions) or a scheduled job (use Automations)."
+description: "Run unattended work with Loop, a decision log, and resumable wip: commits. Use when the user hands off and steps away; use Missions for multiple features or Automations for scheduled jobs."
 license: MIT
 compatibility: droid
 disable-model-invocation: true
@@ -8,7 +8,7 @@ disable-model-invocation: true
 
 # Unattended run
 
-Define done, then drive to it without stopping. The user reviews the trail later, so the trail must be true.
+Drive to a defined outcome. Keep an accurate trail for later review.
 
 ## 1. Set the exit condition
 
@@ -22,7 +22,7 @@ Keep one TSV log outside git, `/tmp/<slug>-decisions.tsv` or `.factory/runs/<slu
 "${DROID_PLUGIN_ROOT}/skills/unattended-run/scripts/log.sh" <log> <phase> "<decision>" "<why>" "<evidence>" "<result>"
 ```
 
-Log decision points, not every action: a fork chosen, a unit verified, a revert and its trigger, a blocker. Evidence is a pointer (a commit, `file:line`, an artifact path), never a paragraph. The log is append-only. A wrong row gets a new row that supersedes it.
+Log decisions, verified units, reverts and triggers, and blockers, not every action. Evidence is a pointer (commit, `file:line`, artifact path), not prose. Append only; supersede wrong rows with new ones.
 
 ## 3. Pick the wake
 
@@ -33,7 +33,7 @@ Droid keeps the plan and the approved spec through compaction. The log keeps eve
 
 ## 4. Iterate
 
-Each iteration makes the smallest change the evidence supports, runs `prove-it-works` against the predicate, commits if it advanced, and reverts if it did not. A change that "might help" is reverted, not left in. Log one row per iteration.
+Each iteration makes the smallest evidence-supported change, runs `prove-it-works` against the predicate, commits progress or reverts, and logs one row. Revert speculative changes.
 
 Fix what blocks the goal yourself: broken scripts, flaky checks, related bugs. Put unrelated fixes in their own commit. Do not stop to ask about reversible work. Stop only for an irreversible action, a product call no experiment can settle, or a real dead end.
 
@@ -50,7 +50,7 @@ When the user asks to pause, or the run must stop:
 
 ## 6. Audit before handing back
 
-Walk the log against what actually happened this run. Every row maps to a real action, every evidence pointer resolves, and every pivot or abandoned approach that shaped the work has a row. Add superseding rows for anything wrong. Never edit or delete a row.
+Audit every row against the run. Require real actions, resolving evidence pointers, and rows for every consequential pivot or abandoned approach. Supersede errors without editing or deleting rows.
 
 Then issue one `explorer` Task to review the log and the diff for weak evidence, skipped verification, and risky calls, and fold its flags into the reply.
 

@@ -1,18 +1,18 @@
 ---
 name: test-first
-description: "Write a failing test that pins the behavior, make it pass, then refactor. Use when the user asks for TDD or a regression test, or when a bug has an obvious reproduction; not for skill or prompt eval loops (use eval-runs or eval-hillclimb)."
+description: "Write a failing behavior test, make it pass, then refactor. Use for TDD, regression tests, or bugs with obvious repros; use eval-runs or eval-hillclimb for skill or prompt evals."
 license: MIT
 compatibility: droid
 ---
 
 # Test first
 
-Make the intended behavior executable before changing production code. The test fails before the change and passes after it.
+Before changing production code, make the intended behavior executable. Require failure before and success after.
 
 ## Steps
 
 1. **Pin the behavior.** State the intended behavior, the current behavior, and the smallest observable case.
-2. **Pick the narrowest test.** Use the closest unit, component, or integration test the codebase already has for that path. Do not build a new harness just to satisfy this skill.
+2. **Pick the narrowest test.** Use the closest existing unit, component, or integration test for the path, without building a new harness just for this skill.
 3. **Write the test.** Drive the code through the interface its users touch. Derive the expected value from the requirement, not from a run of the code. See `engineering-principles` (test-behavior-not-implementation).
 4. **Watch it fail.** Run it. It must fail for the intended reason. If it passes, or fails for another reason, fix the test first.
 5. **Make it pass.** Write the smallest production change that satisfies the test.
@@ -22,7 +22,7 @@ Make the intended behavior executable before changing production code. The test 
 
 ## When a test is impractical
 
-If the only test would need broad harness setup, brittle mocks, production-only state, or large fixture churn, use the closest executable check instead: a script, a repro command, or an app drive through `prove-it-works`. No new test beats a bad test.
+If the only test needs broad harness setup, brittle mocks, production-only state, or large fixture churn, use a script, repro command, or app drive through `prove-it-works` instead.
 
 ## Guardrails
 

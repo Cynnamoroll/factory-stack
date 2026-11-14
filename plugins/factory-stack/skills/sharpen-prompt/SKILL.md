@@ -1,13 +1,13 @@
 ---
 name: sharpen-prompt
-description: "Restate what a task is for, then rewrite the prompt so it goes deeper without growing in scope. Use on a vague or broad request before Spec mode or a Mission picks it up; not as a substitute for entering Spec mode once the request is already sharp."
+description: "Deepen a vague or broad prompt without expanding scope before Spec mode or a Mission. Use Spec mode directly once the request is sharp."
 license: MIT
 compatibility: droid
 ---
 
 # Sharpen prompt
 
-Make the task deeper, not bigger. Do not start the work.
+Deepen the request without starting the work.
 
 1. **Restate the goal** in your own words: what the user wants and the problem behind it.
 2. **Name what a top practitioner would do** here that the request does not ask for.
@@ -16,7 +16,7 @@ Make the task deeper, not bigger. Do not start the work.
 5. **Name the outside check** that would show the result is right, other than you or the user.
 6. **Rewrite the prompt** to ask for exactly that, at the same scope.
 
-Leave the user's own choices open. Do not decide them in the rewrite.
+Leave the user's choices open in the rewrite.
 
 ## Done when
 

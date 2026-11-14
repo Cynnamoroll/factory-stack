@@ -2,7 +2,7 @@
 
 Apply when writing stateful logic, or when code branches a lot or repeats a shape assumption across files.
 
-Encode the real domain in a data structure instead of scattering it across conditionals. A structure that matches the domain makes invalid states unrepresentable and deletes branches. Choosing it at write time is cheap. Recovering it later reads as a refactor and gets deferred.
+Encode the domain in a data structure instead of scattered conditionals. A matching structure makes invalid states unrepresentable and deletes branches. Choose it at write time, before the work becomes a deferred refactor.
 
 Reach for:
 
@@ -15,6 +15,6 @@ Reach for:
 - A queue, cache, index, graph, tree, or normalized collection where the access pattern calls for it.
 - Any other structure that fits. When none fits, work out what the code must never allow and how the data gets read, then find the structure that encodes exactly that.
 
-Do not force an abstraction. Prefer boring code if the current shape is already clear, local, and unlikely to grow. Be skeptical of an abstraction that adds indirection without removing branches, duplicated rules, invalid states, or lifecycle risk.
+Prefer boring code when the current shape is clear, local, and unlikely to grow. An abstraction should remove branches, duplicated rules, invalid states, or lifecycle risk, not merely add indirection.
 
 The sign that you skipped this is a new feature that grows an existing if/else chain by one more branch, or a second boolean that must stay in sync with the first. Temporal decomposition is another sign. Phase-named modules repeat the same domain rules across steps.

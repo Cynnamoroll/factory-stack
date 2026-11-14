@@ -1,6 +1,6 @@
 ---
 name: explain-how
-description: "Explain how code works today in a walkthrough with file references, using explorer subagents. Use before changing unfamiliar code or for how-does-X-work questions; not for history or rationale (use explain-why) and not for a quick lookup (use a bare explorer Task)."
+description: "Explain current code with file references and explorer subagents. Use for unfamiliar code or how-it-works questions; use explain-why for history or rationale, or a bare explorer Task for quick lookups."
 license: MIT
 compatibility: droid
 allowed-tools:
@@ -13,11 +13,11 @@ allowed-tools:
 
 # Explain how
 
-Write the explanation a senior engineer needs to start working in a subsystem: enough for a working mental model, not annotated source. This skill is read-only.
+Give a senior engineer a working mental model, not annotated source. Stay read-only.
 
 ## 1. Size the question
 
-If the scope is unclear, state your reading and continue. The user can redirect.
+If scope is unclear, state your reading and continue.
 
 - **Simple** (one module, one function, a narrow question). Read the code yourself and go to step 3.
 - **Complex** (a subsystem across files or services, a cross-cutting feature, an architecture overview). Go to step 2.
@@ -30,7 +30,7 @@ Split the question into 2 to 4 angles, each a distinct slice of the subsystem. I
 
 ## 3. Write the walkthrough
 
-Reconcile the explorer reports yourself. Merge overlaps, and settle contradictions by reading the code. Do not re-explore from scratch. Write the result in the shape of [references/walkthrough-format.md](references/walkthrough-format.md), dropping sections that do not apply.
+Merge explorer reports and settle contradictions from code without re-exploring. Follow [references/walkthrough-format.md](references/walkthrough-format.md), omitting inapplicable sections.
 
 ## Done when
 

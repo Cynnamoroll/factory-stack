@@ -1,17 +1,17 @@
 ---
 name: prove-it-works
-description: "Verify a change in the running system before calling the work done, using the project's verify-<app> skill if one exists, otherwise agent-browser or tuistory, plus tests. Use before finishing a bug fix, feature, or refactor; not for a diff review (use /review or adversarial-review) or a reuse, quality, and efficiency sweep (use simplify)."
+description: "Verify fixes, features, and refactors in the running system using verify-<app>, otherwise agent-browser or tuistory, plus tests. Use before finishing; use /review or adversarial-review for diffs, or simplify for reuse, quality, and efficiency."
 license: MIT
 compatibility: droid
 ---
 
 # Prove it works
 
-The gate before "done". Check the real thing directly, not a proxy, a self-report, or "it compiles". Unit tests show branch behavior, not that the user-facing problem is gone.
+Check the real artifact directly. Compilation, self-reports, proxies, and unit tests alone do not prove the user-facing result.
 
 ## 1. Name the claim
 
-Write one sentence a user could check, such as "saving a note with a 500-character title keeps the full title after reload." For a bug fix, the claim is that the original repro now behaves correctly.
+State one user-checkable claim, such as "saving a note with a 500-character title keeps the full title after reload." For bugs, use the original repro.
 
 ## 2. Pick the surface
 
@@ -34,7 +34,7 @@ Prefer a script that reruns the same comparison over a one-time look. Keep it un
 
 ## 4. When it fails
 
-Fix the cause, not the check. Rerun from step 3. Never weaken an assertion or skip a step to get a pass. If the change cannot be exercised here (missing credentials, production-only state, hardware), say exactly what blocks it and what the closest check showed.
+Fix the cause and rerun step 3 without weakening assertions or skipping steps. If credentials, production-only state, or hardware block the run, name the blocker and the closest check's result.
 
 ## Done when
 
