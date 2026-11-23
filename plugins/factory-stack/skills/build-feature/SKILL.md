@@ -1,6 +1,6 @@
 ---
 name: build-feature
-description: "Design in Spec mode, build, and verify with prove-it-works. Use for features, prototypes, and visual parity; use Spec mode alone for plans, or refactoring-playbook for large refactors, migrations, and dependency upgrades."
+description: "Design, build, and verify features, prototypes, or visual-parity changes. Use Spec mode alone for plans and refactoring-playbook for large migrations."
 license: MIT
 compatibility: droid
 ---
@@ -34,7 +34,7 @@ Run `prove-it-works` on the running app. If the design was contested, run `adver
 
 ## Variants
 
-- **Prototype.** The deliverable is a decision, not code. Build throwaway variants in a scratch directory outside the source tree, behind one switcher (buttons or a key), using the lightest stack that shows the idea. Observe each variant (screenshots with `agent-browser`, or logged timing). Present the variants, evidence, and a recommendation, and say plainly that the prototype is throwaway.
+- **Prototype.** Build throwaway variants behind one switcher in a scratch directory outside the source tree. Use the lightest stack that shows the idea. Capture screenshots or timings for each variant using the surface picked by `prove-it-works`. Present the evidence and recommendation; label the prototype throwaway.
 - **Visual parity.** Capture a screenshot baseline of every component state before any change. Never edit the baseline or the harness to pass. Migrate one component at a time, shared pieces first. A component passes only at zero image diff against its baseline.
 
 ## When validation fails

@@ -1,6 +1,6 @@
 ---
 name: engineering-principles
-description: "Apply named principles to coding or review decisions, such as fix root causes or explain the number. Read only relevant files; use AGENTS.md for repository rules, prove-it-works or vet-measurement for verification procedures."
+description: "Apply a named engineering principle to a coding or review decision. Read only the principles that apply."
 license: MIT
 compatibility: droid
 user-invocable: false

@@ -1,6 +1,6 @@
 ---
 name: ship-pr
-description: "Verify each PR in an isolated worktree, run simplify, and open it with gh. Use for completed work ready for review; use bare gh pr create if those passes are unnecessary, or watch-pr for an open PR."
+description: "Verify isolated PR branches, simplify their diffs, and open pull requests."
 license: MIT
 compatibility: droid
 disable-model-invocation: true
@@ -22,10 +22,10 @@ Verify each PR branch in a fresh run and worktree, separate from its author:
 
 ```sh
 droid exec -m auto --auto medium --worktree "verify-<branch>" -o json \
-	"Check out <branch>. Run /prove-it-works on the change between <base> and <branch>. End with PASS, PASS+NOTES, or FAIL and the evidence."
+	"Check out <branch> in this worktree. Verify <base>..<branch> with /prove-it-works. Return commit, verdict, and evidence paths or blocker."
 ```
 
-Run several with `&` and `wait`. CI and bot approval do not replace a user-path run. Return a FAIL to the author; do not open that PR.
+Parallelize only independent app instances, accounts, and input surfaces. Worktrees do not isolate desktop focus. CI and bot approval cannot replace a user-path run. `FAIL`, `BLOCKED`, or a missing required artifact stops that PR; return the finding or blocker.
 
 Record the verified commit. After a rebase, compare `git diff <base>...<verdict-sha> | git patch-id --stable` with the current head's patch ID. Reverify if they differ.
 

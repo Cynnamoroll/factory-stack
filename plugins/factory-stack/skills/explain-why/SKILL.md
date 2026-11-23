@@ -1,6 +1,6 @@
 ---
 name: explain-why
-description: "Explain code rationale from git, PRs, issues, and connected MCP sources with citations. Use for design rationale, regressions, and postmortems; use explain-how for current behavior or droid search for session history."
+description: "Trace code rationale, regressions, and postmortems to cited records. Use explain-how for current behavior."
 license: MIT
 compatibility: droid
 ---
@@ -13,23 +13,15 @@ Trace reasons through incomplete commits, PRs, tickets, docs, chat, and incident
 
 Name the code, pattern, or decision and the question (rationale, tradeoff, edge case, external constraint, dead code, or history sweep). If vague, state your best reading and continue.
 
-## 2. Build the code anchor yourself
+## 2. Own source control in the parent
 
-Before any fan-out, collect the seed every investigator gets:
+Anchor the question to paths, lines, and symbols. Trace `git blame` and `git log --follow` to substantive commits and their PRs; collect cited reasons, linked records, and gaps. Do not assign this history to a second reader.
 
-- file paths, line ranges, and key symbols
-- `git blame -L <start>,<end> <file>` for last-touch commits
-- `git log --follow --oneline -- <file>` and `git log -1 --format=%B <sha>` for history and PR numbers
-- `gh pr view <n> --json title,body,author,mergedAt,closingIssuesReferences,comments,reviews` for each substantive PR
-- ticket IDs mentioned in commits or PR bodies
+## 3. Route gaps to evidence sources
 
-## 3. Fan out one investigator per evidence source
+Go straight to synthesis for a narrow question answered by an author record if there is no unresolved contradiction, relevant lead, incident signal, or requested breadth. Otherwise route each gap to the source that can resolve it: issues, docs, chat, observability, errors, or analytics. For defensive code, investigate the incident rather than inferring a reason from the guard.
 
-List the MCP servers this session has. Map each to one category: issue tracker, long-form docs, team chat, observability, error tracking, or analytics warehouse. Source control (`git`, `gh`) is always a category.
-
-Issue one Task per category, all in one message. Each owns exactly one source and never chases another source's leads. Use a `worker` Task and state in the prompt that it must not write files or change external state. `explorer` is read-only but may not carry shell or MCP tools, which these investigators need. Build each prompt from [references/investigator-prompt.md](references/investigator-prompt.md). If the target looks defensive (retries, timeouts, null guards, rate limits, feature flags), tell the investigator to search for the incident behind it.
-
-Skip a category only with a written reason that goes in the answer: no MCP server for it, or the source is provably irrelevant (for example, error tracking for a build-time script).
+Check a single bounded lead inline. Parallelize independent sources with [the investigator brief](references/investigator-prompt.md). Give each only its gap, source, and relevant identifiers. Use read-only tools when they support the source; otherwise give the worker an explicit no-write brief. Follow new cross-source leads in the parent. Report why each category was searched or skipped.
 
 ## 4. Synthesize
 

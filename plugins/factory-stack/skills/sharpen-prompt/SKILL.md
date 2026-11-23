@@ -1,6 +1,6 @@
 ---
 name: sharpen-prompt
-description: "Deepen a vague or broad prompt without expanding scope before Spec mode or a Mission. Use Spec mode directly once the request is sharp."
+description: "Deepen a vague prompt without expanding scope before Spec mode or a Mission."
 license: MIT
 compatibility: droid
 ---

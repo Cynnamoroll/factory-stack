@@ -1,6 +1,6 @@
 ---
 name: unattended-run
-description: "Run unattended work with Loop, a decision log, and resumable wip: commits. Use when the user hands off and steps away; use Missions for multiple features or Automations for scheduled jobs."
+description: "Run a defined task unattended with a decision log and resumable checkpoints."
 license: MIT
 compatibility: droid
 disable-model-invocation: true

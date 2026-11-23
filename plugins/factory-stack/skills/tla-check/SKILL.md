@@ -1,6 +1,6 @@
 ---
 name: tla-check
-description: "Check existing TLA+ models with TLC, render states, and report violations. Use to verify models or run the checker; use create-tla-model or maintain-tla-model for edits, or eval-runs or eval-hillclimb for skill or prompt evals."
+description: "Run TLC on existing models, render states, and report violations. Use create-tla-model or maintain-tla-model to edit models."
 license: MIT
 compatibility: droid
 ---

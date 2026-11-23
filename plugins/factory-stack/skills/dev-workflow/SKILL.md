@@ -1,6 +1,6 @@
 ---
 name: dev-workflow
-description: "Set session autonomy, reply, comment, and fan-out rules at the start of coding. Use AGENTS.md for repository conventions and a task-specific skill for workflows such as fixing bugs or shipping PRs."
+description: "Set autonomy, communication, and delegation rules at the start of coding. Use AGENTS.md for repository conventions."
 license: MIT
 compatibility: droid
 ---
@@ -11,11 +11,10 @@ Session rules. Keep repository commands and conventions in `AGENTS.md`.
 
 ## Non-negotiables
 
-- First message, restate the goal, underlying problem, and smallest expected change. Proceed without confirmation unless evidence rules out the request. Then show it and stop.
-- Name the data shape before writing code. Load `engineering-principles` when a decision needs a principle, and name each principle you applied with the choice it changed.
-- Run experiments to answer observable questions (behavior, timing, layout, output). Ask only for product or preference calls experiments cannot settle.
-- Use Spec mode to plan non-trivial changes. Do not write your own plan-approval loop.
-- Before calling work done, run `prove-it-works`.
+- Open with goal, problem, and smallest expected change. Stop and show the evidence if it rules out the request.
+- Name the data shape before coding. Apply and cite only the `engineering-principles` that changed a decision.
+- Test observable questions. Ask only for decisions evidence cannot settle or actions requiring approval.
+- Use Spec mode for non-trivial plans and `prove-it-works` before declaring done.
 
 ## Autonomy
 
@@ -26,20 +25,16 @@ Session rules. Keep repository commands and conventions in `AGENTS.md`.
 
 ## Fan-out
 
-- Read-only lanes are parallel `explorer` Tasks, all issued in one message. Give each a file pointer and one angle, not pasted context.
-- A delegate that writes code is one `principled-worker` Task. In-session subagents share one working folder, so never run two writing Tasks on overlapping files.
+- Parent owns scope, approval, integration, and the final verdict. For independent read-only lanes, issue `explorer` Tasks together with one angle and file pointers. For mechanical lanes, pass exact commands, absolute paths, and expected output; get results and blockers, not a transcript.
+- Use `principled-worker` for delegated edits. In-session agents share one working folder; writing scopes must be disjoint.
 - Several writers at once run as `droid exec -m auto --worktree <name> --auto medium "<brief>"`, one worktree each.
 - Subagents cannot start subagents. Fan-out happens from the main session only.
-- Review every subagent's diff or evidence and write your own summary, not a forwarded report.
-- Start a fresh Task with consolidated scope (original brief, later directives, prior report). Resume only when moving its state would be costly.
+- Check each delegate's diff or evidence yourself. Start fresh with a consolidated brief unless transferring state costs more.
 - Inside a Mission, the validators are the review. Workers skip review fan-out but still run `prove-it-works`.
 
 ## Tokens
 
-- Point at a file and line range instead of pasting content.
-- Keep tool output small. Filter before you read.
-- Rerun only what failed plus what the fix touched.
-- The second time you repeat a setup by hand, script it.
+- Point to file ranges, filter output, and rerun only failed or affected checks. Script setup at its second manual run.
 
 ## Reply
 

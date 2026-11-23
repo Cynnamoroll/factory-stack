@@ -1,6 +1,6 @@
 ---
 name: explain-how
-description: "Explain current code with file references and explorer subagents. Use for unfamiliar code or how-it-works questions; use explain-why for history or rationale, or a bare explorer Task for quick lookups."
+description: "Explain how current code works, with citations. Use explain-why for history or rationale."
 license: MIT
 compatibility: droid
 allowed-tools:

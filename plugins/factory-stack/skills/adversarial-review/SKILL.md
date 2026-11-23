@@ -1,6 +1,6 @@
 ---
 name: adversarial-review
-description: "Attack a risky diff with parallel read-only reviewers and verify every finding. Use before merging; use /review for routine review, simplify for reuse, quality, and efficiency, or check-blast-radius for fallout outside the diff."
+description: "Review risky diffs from independent angles; report only reproduced failures. Use check-blast-radius for fallout outside the diff."
 license: MIT
 compatibility: droid
 ---
