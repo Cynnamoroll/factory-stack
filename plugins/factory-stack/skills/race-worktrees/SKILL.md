@@ -1,6 +1,6 @@
 ---
 name: race-worktrees
-description: "Race independent droid exec candidates in separate worktrees and combine their strongest parts. Use for competing designs; use Missions for multiple features or Spec mode for one plan."
+description: "Race competing designs in separate worktrees and combine the strongest verified changes."
 license: MIT
 compatibility: droid
 disable-model-invocation: true
@@ -50,6 +50,8 @@ Walk each losing candidate once more for the one or two things worth porting. Fo
 ## 6. Verify and clean up
 
 Run `prove-it-works` on the merged result in the main checkout. If it finds a problem the race missed, go back to Frame or Graft. Then remove the candidate worktrees with `git worktree remove <path>` and `git worktree prune`.
+
+Run candidate app captures in parallel only if ports, profiles, data, and input surfaces are independent. Worktrees alone do not isolate a desktop. A blocked required check is not a verified result.
 
 ## Done when
 

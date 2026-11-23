@@ -1,6 +1,6 @@
 ---
 name: check-blast-radius
-description: "Find breakage outside the diff and prove it with a repro or test. Use for fallout beyond changed lines; use adversarial-review to attack the diff itself or /review for routine review."
+description: "Find and reproduce breakage outside the diff. Use adversarial-review for failures in the changed code."
 license: MIT
 compatibility: droid
 ---

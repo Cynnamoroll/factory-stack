@@ -1,6 +1,6 @@
 ---
 name: create-tla-model
-description: "Model stateful flows, protocols, and state machines in TLA+. Use for new formal models of behavior tests rarely cover; use tla-check to re-check models or maintain-tla-model after code changes."
+description: "Create TLA+ models for new state machines, flows, or protocols. Use maintain-tla-model for drift and tla-check for unchanged models."
 license: MIT
 compatibility: droid
 ---

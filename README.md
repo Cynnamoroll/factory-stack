@@ -1,6 +1,6 @@
 # factory-stack
 
-factory-stack is a set of agentic skills for Factory's Droid CLI. It packages 25 skills, and one custom droid named `principled-worker` as a single Droid plugin. The skills cover how a coding session runs, how to understand and change code, how to review and verify changes, and how to carry work through a pull request. Each skill does one job that Droid does not already do. Where Droid has a built-in feature for a job, factory-stack uses that feature and does not ship a replacement.
+factory-stack is a set of 26 skills and one custom droid, `principled-worker`, for Factory's Droid CLI. It covers understanding and changing code, verifying behavior, and carrying work through a pull request. It uses Droid's built-in features and official tools where they already do the job.
 
 ## Design principles
 
@@ -24,7 +24,7 @@ Verification has its own skills. `prove-it-works` checks a change in the running
 
 ### Do not duplicate built-ins
 
-Every skill was compared against Droid's 45 built-in skills, 51 built-in slash commands, built-in droids, and Factory's official plugins. Each skill description names the nearest built-in and says when to use it instead. No skill name collides with a built-in name.
+Prefer Droid's built-ins for work they already cover. Skill descriptions name distinct triggers and clarify boundaries where workflows overlap.
 
 ## Requirements
 
@@ -39,7 +39,7 @@ Every skill was compared against Droid's 45 built-in skills, 51 built-in slash c
 
 ## Installation
 
-The repository is a Droid marketplace that contains one plugin, `factory-stack`.
+The repository is a Droid marketplace with one plugin, `factory-stack`. It does not distribute upstream plugins.
 
 1. Add the marketplace:
 
@@ -60,6 +60,18 @@ The repository is a Droid marketplace that contains one plugin, `factory-stack`.
 To enable the plugin for a whole team, add the marketplace to `extraKnownMarketplaces` and the plugin to `enabledPlugins` in the project's `.factory/settings.json`.
 
 A project skill with the same name as a factory-stack skill takes precedence over it. An organization plugin skill takes precedence over both.
+
+### Droid Control
+
+Run `/droid-control <target and goal>` to drive a real app, test a claim, run a QA flow, or record a demo. Factory-stack maintains [this skill](plugins/factory-stack/skills/droid-control/SKILL.md) until Factory ships it natively. If another Droid Control plugin is installed, disable it in the relevant scope and start a new session so `/skills` shows the factory-stack version.
+
+The skill uses a matching project `verify-<app>` recipe before planning a new flow. Ordinary browser screenshots and video, desktop screenshots, and unrecorded TUI workflows can use their drivers directly. For Factory's [`tctl`](https://github.com/Factory-AI/factory-plugins/blob/master/plugins/droid-control/bin/tctl), terminal recording or byte capture, native-terminal setup, and showcase rendering, use the original [Factory helpers](https://github.com/Factory-AI/factory-plugins/tree/master/plugins/droid-control). Keep the checkout outside this repository; do not register it as a plugin. For example, in a POSIX shell:
+
+```sh
+git clone https://github.com/Factory-AI/factory-plugins "$HOME/factory-control-helpers"
+```
+
+For a different checkout, set `DROID_CONTROL_HELPERS_ROOT` to its absolute `plugins/droid-control` path or supply that path in your request. The skill reads the full upstream instructions only for the chosen driver, evidence stage, and platform. It uses helpers from the same checkout and keeps basic local fallbacks for runs that do not need them.
 
 ### Update
 
@@ -147,9 +159,10 @@ Each table lists the skill, what it does, when to use it, and when a Factory bui
 
 | Skill | What it does | Use it when | Use instead |
 |---|---|---|---|
-| `prove-it-works` | Verifies a change in the running system before the work counts as done. It uses the project's `verify-<app>` skill if one exists, otherwise `agent-browser` or `tuistory`, plus tests. | You are about to finish a bug fix, a feature, or a refactor. | `/review` or `adversarial-review` for a diff review. `simplify` for a reuse, quality, and efficiency sweep. |
-| `create-verify-skill` (slash-only) | Creates a project `verify-<app>` skill that drives the running app the way a user does. It uses `agent-browser` for web apps and `tuistory` for terminal apps. | A project has no verify skill yet. | `maintain-verify-skill` to refresh a drifted one. `/create-skill` to draft a generic skill. `agent-browser` or `tuistory` for a one-time drive of the app. |
-| `maintain-verify-skill` | Refreshes an existing project `verify-<app>` skill so that it still drives the running app the way a user does. | Features changed and the verify skill has drifted. | `create-verify-skill` to create the first verify skill. `agent-browser` or `tuistory` for a one-time drive. |
+| `droid-control` | Drives a real terminal, browser, or desktop app and captures evidence. | You need a stand-alone behavior check, QA flow, or demo. | `prove-it-works` to verify a change before finishing. |
+| `prove-it-works` | Runs relevant tests and verifies the change on the real surface, using the project recipe first and `droid-control` for interactive apps without a recipe. | You are about to finish a bug fix, a feature, or a refactor. | `/review` for a diff review. |
+| `create-verify-skill` (slash-only) | Creates a repeatable `verify-<app>` skill using the project's harness or a driver for the real app. | A project has no verify skill yet. | `maintain-verify-skill` for drift. `droid-control` for a one-off flow. |
+| `maintain-verify-skill` | Refreshes an existing project `verify-<app>` skill against source and live behavior. | Features changed and the verify skill has drifted. | `create-verify-skill` to create the first recipe. `droid-control` for a one-off flow. |
 
 `create-verify-skill` writes the generated skill to the project's `.factory/skills/verify-<app>/`, not into the plugin.
 
@@ -212,15 +225,15 @@ Subagents in Droid cannot start their own subagents. Skills that fan out, such a
 
 ## Repository layout
 
-The repository contains only skills, this README, and the license:
+The repository ships factory-stack and its skills:
 
 ```text
 factory-stack/
-	.factory-plugin/marketplace.json        # one plugin, source ./plugins/factory-stack
+	.factory-plugin/marketplace.json        # local factory-stack only
 	plugins/factory-stack/
 		.factory-plugin/plugin.json
 		skills/
-			<skill-name>/SKILL.md               # one directory per skill, 25 in total
+			<skill-name>/SKILL.md               # one directory per skill, 26 in total
 			engineering-principles/             # SKILL.md plus 24 principle files
 			tla-check/scripts/                  # TLC runner and Mermaid renderer
 			watch-pr/scripts/pr-status.sh       # pull request status check

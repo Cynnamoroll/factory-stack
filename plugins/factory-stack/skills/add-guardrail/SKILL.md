@@ -1,6 +1,6 @@
 ---
 name: add-guardrail
-description: "Block repeated mistakes with types, lint, CI, hooks, or permission rules, with AGENTS.md last. Use after a correction recurs or to mine past sessions with droid search; not for opening /hooks or editing permissionRules by hand."
+description: "Turn a repeated mistake into an enforced check, hook, permission rule, or last-resort instruction."
 license: MIT
 compatibility: droid
 disable-model-invocation: true

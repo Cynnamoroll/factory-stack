@@ -1,6 +1,6 @@
 ---
 name: vet-measurement
-description: "Vet a decision-driving measurement's limiter, tuning, limits, errors, repeatability, and relevance, including within tune-perf. Use before trusting, reporting, or acting; use eval-runs or eval-hillclimb for skill or prompt evals, or tune-perf to change performance."
+description: "Check whether a measurement supports a decision. Use tune-perf to improve performance or eval-runs for skill evaluations."
 license: MIT
 compatibility: droid
 ---

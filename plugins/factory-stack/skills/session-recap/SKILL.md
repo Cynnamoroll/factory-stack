@@ -1,6 +1,6 @@
 ---
 name: session-recap
-description: "Recap changes, files, decisions, and pending user calls since the last message or across past sessions. Use when returning to work; use droid search, droid resume, or session-navigation to find, list, or resume sessions."
+description: "Recap prior work, current status, and decisions still waiting on the user. Use session-navigation to search or resume sessions."
 license: MIT
 compatibility: droid
 allowed-tools:

@@ -1,6 +1,6 @@
 ---
 name: maintain-tla-model
-description: "Update TLA+ models after changes to covered code, then run tla-check. Use create-tla-model for first models or tla-check to check unchanged models."
+description: "Sync existing TLA+ models to changed code and recheck them. Use tla-check for unchanged models."
 license: MIT
 compatibility: droid
 ---

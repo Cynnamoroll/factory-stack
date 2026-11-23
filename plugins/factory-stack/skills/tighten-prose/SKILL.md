@@ -1,6 +1,6 @@
 ---
 name: tighten-prose
-description: "Cut filler, hedging, and stock phrasing while applying technical-writing rules. Use for READMEs, docs, PRs, commits, and comments; use simplify for code reuse, quality, and efficiency."
+description: "Cut filler and stock phrasing from docs, PRs, commits, or comments. Use simplify for code."
 license: MIT
 compatibility: droid
 ---

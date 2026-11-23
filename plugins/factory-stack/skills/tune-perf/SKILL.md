@@ -1,6 +1,6 @@
 ---
 name: tune-perf
-description: "Measure, run vet-measurement, change one thing, and remeasure slowdowns, performance regressions, or metric climbs. Use fix-bug for correctness or vet-measurement for numbers alone; not for unmeasured refactors."
+description: "Measure and fix a slowdown, regression, or metric target. Use vet-measurement to assess a number without changing the system."
 license: MIT
 compatibility: droid
 ---

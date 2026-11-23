@@ -1,6 +1,6 @@
 ---
 name: test-first
-description: "Write a failing behavior test, make it pass, then refactor. Use for TDD, regression tests, or bugs with obvious repros; use eval-runs or eval-hillclimb for skill or prompt evals."
+description: "Use TDD or pin a regression: write a failing behavior test, make it pass, then refactor."
 license: MIT
 compatibility: droid
 ---
