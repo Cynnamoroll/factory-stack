@@ -10,8 +10,9 @@ version: 0.1.0
 
 1. **Commit.** Pin the build, target, method, postconditions, and artifacts. Get approval before recording a demo. Compare only real builds with identical actions; otherwise use one clip.
 2. **Route.** Honor the requested method. A compatible `verify-<app>` owns the lifecycle; use its mapped test when it covers the claim. Without a recipe, reuse a matching project test or select a driver below. If called for mechanics, stay on that step. Add the evidence route before launch when needed.
-3. **Drive.** Read [QA cleanup](references/qa-cleanup.md) before launch or mutation. Isolate each attempt. Observe, act, wait, verify; reobserve before retrying. Keep shared-desktop input in the parent.
-4. **Report.** Apply [proof checks](references/verify.md) for QA, claims, or video. Verify teardown even on failure and confirm delivered evidence still opens. Report build, method, observations, artifacts, and blockers.
+3. **Setup.** Check the selected route's prerequisites. If any are missing, follow [agent-owned setup](references/setup.md) before driving or choosing a fallback.
+4. **Drive.** Read [QA cleanup](references/qa-cleanup.md) before launch or mutation. Isolate each attempt. Observe, act, wait, verify; reobserve before retrying. Keep shared-desktop input in the parent.
+5. **Report.** Apply [proof checks](references/verify.md) for QA, claims, or video. Verify teardown even on failure and confirm delivered evidence still opens. Report build, method, observations, artifacts, and blockers.
 
 | Target or required capability | Read or load |
 |---|---|

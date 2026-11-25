@@ -20,7 +20,7 @@ Answer from code. Ask only what you cannot observe.
 - **Observe.** Screenshots, terminal transcripts, response bodies, logs, exit codes, stored state.
 - **Isolate.** Can two instances run side by side (ports, data dirs, profiles)? If not, the generated skill says so and refuses to drive a shared instance.
 
-If the checkout does not build or start, fix that or report it precisely before generating.
+For missing prerequisites, follow [agent-owned setup](../droid-control/references/setup.md). If the checkout still does not build or start, fix that or report the blocker before generating.
 
 ## 2. Write the skill
 
