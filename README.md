@@ -28,13 +28,11 @@ Droid can also pick most skills from a natural-language request. See the [full s
 
 ## Set up Droid Control
 
-`/droid-control` uses your project's `verify-<app>` recipe when it can satisfy the request. Basic browser capture, desktop screenshots, and unrecorded terminal flows can use the available drivers directly.
+`/droid-control` reuses your project's `verify-<app>` recipe or tests. It uses [e2e](https://github.com/e2e-inc/e2e) for web, iOS, Android, and native macOS testing. Windows and Linux native desktop apps are out of scope. Use `agent-browser` for the Factory browser pane or Electron renderer, and `tuistory` for unrecorded terminal flows.
 
-For terminal recordings, byte capture, native-terminal setup, or showcase rendering, keep a separate checkout of the [original Factory helpers](https://github.com/Factory-AI/factory-plugins/tree/master/plugins/droid-control). Do not register this checkout as a Droid plugin:
+Start Droid from the app project. The plugin registers `e2e` in `/mcp` and resolves the runner offline without installing it. If prerequisites are missing, Droid asks for approval, then installs and verifies them and continues the task. See [e2e setup](plugins/factory-stack/skills/droid-control/references/e2e-setup.md) for prerequisites.
 
-```sh
-git clone https://github.com/Factory-AI/factory-plugins "$HOME/factory-control-helpers"
-```
+For terminal recordings, byte capture, real emulator setup, or produced video, Droid can set up a separate checkout of the [original Factory helpers](https://github.com/Factory-AI/factory-plugins/tree/master/plugins/droid-control) after approval. It does not register that checkout as a plugin.
 
 For a different location, set `DROID_CONTROL_HELPERS_ROOT` to the absolute `plugins/droid-control` directory, or pass that path in the request. See the [macOS `tctl` compatibility note](plugins/factory-stack/skills/droid-control/references/macos-tctl.md) before using older terminal helpers on macOS.
 

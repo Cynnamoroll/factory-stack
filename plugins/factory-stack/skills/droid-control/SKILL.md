@@ -1,6 +1,6 @@
 ---
 name: droid-control
-description: "Drive real terminal, browser, Electron, or desktop apps for QA, behavior proof, or recorded demos."
+description: "Run e2e, drive live QA, or capture screenshots and demos. Covers web, iOS, Android, native macOS, Electron, terminals, and the Factory browser pane."
 license: MIT
 compatibility: droid
 version: 0.1.0
@@ -8,37 +8,18 @@ version: 0.1.0
 
 # Droid Control
 
-1. **Commit.** Reuse the caller's target, build, method, postconditions, and artifacts. Fill gaps before driving. Screenshots and video are separate commitments. Get approval before recording a demo. Default to one clip; compare only real baselines with identical actions.
-2. **Route.** A matching `verify-<app>` owns Launch, Doctor, relevant feature steps, and Cleanup if it supports the required method. If it called you for mechanics, stay on that step. Select the union of target, stage, and polish routes below.
-3. **Run.** Use the real app. Give each attempt unique session and scratch paths. Read [QA cleanup](references/qa-cleanup.md) before starting resources or mutating state. Observe, act, wait, verify; reobserve before retrying uncertain input. The parent owns the plan, shared desktop, permissions, and verdict. Independent capture or render workers get only commands, absolute paths, and expected outputs; return observations, artifact paths, and blockers.
-4. **Report.** Verify the evidence, run cleanup even on partial or failed attempts, and check both teardown and evidence survival. Return build, method, results, reviewed artifact paths, and any cleanup or proof blockers.
+1. **Commit.** Pin the build, target, method, postconditions, and artifacts. Get approval before recording a demo. Compare only real builds with identical actions; otherwise use one clip.
+2. **Route.** Honor the requested method. A compatible `verify-<app>` owns the lifecycle; use its mapped test when it covers the claim. Without a recipe, reuse a matching project test or select a driver below. If called for mechanics, stay on that step. Add the evidence route before launch when needed.
+3. **Setup.** Check the selected route's prerequisites. If any are missing, follow [agent-owned setup](references/setup.md) before driving or choosing a fallback.
+4. **Drive.** Read [QA cleanup](references/qa-cleanup.md) before launch or mutation. Isolate each attempt. Observe, act, wait, verify; reobserve before retrying. Keep shared-desktop input in the parent.
+5. **Report.** Apply [proof checks](references/verify.md) for QA, claims, or video. Verify teardown even on failure and confirm delivered evidence still opens. Report build, method, observations, artifacts, and blockers.
 
-## Routes
-
-Read the full selected driver atom to plan the drive; load each stage atom when you reach that stage. Upstream files live at `skills/droid-control/atoms/<name>/ATOM.md`. Follow only the relevant platform pointers. Keep driver lifecycles separate.
-
-| Target | Atoms |
+| Target or required capability | Read or load |
 |---|---|
-| Native GUI input, including Electron when required | `desktop-use` |
-| Web or Electron otherwise | `browser-use` |
-| Terminal TUI | `terminal-use` |
-| Droid CLI | `terminal-use`, `droid-cli` |
-| Actual emulator rendering or physical key handling | `terminal-use`, `true-input` |
-| Exact terminal bytes | `terminal-use`, `true-input`, `pty-capture` |
+| Web, iOS, Android, native macOS | [e2e](references/e2e.md) |
+| Factory browser pane, Electron renderer, or one-off web drive without e2e | [Browser](references/browser-use.md) |
+| Unrecorded virtual terminal | `tuistory` via `Skill` |
+| Droid CLI launch, `tctl`, terminal scrollback, real emulator, or exact bytes | [Factory capture helpers](references/factory-helpers.md) |
+| Terminal recording, scripted browser/terminal capture, or edited artifacts | [Factory capture helpers](references/factory-helpers.md) |
 
-| Stage or artifact | Atoms |
-|---|---|
-| Screenshots, recording, scripted evidence | `capture` |
-| Produced artifact, annotated set, or comparison image | `compose` |
-| Showcase polish | `compose`, `showcase` |
-| Formal proof, QA, or demo | `verify` |
-
-Read upstream `commands/{verify,qa-test,demo}.md` only when the full playbook is needed. Use it as a reference, not a registered command.
-
-## Helpers
-
-Use the trusted absolute `plugins/droid-control` root from the request, `DROID_CONTROL_HELPERS_ROOT`, or `~/factory-control-helpers/plugins/droid-control`, in that order. Validate only selected files. Report an invalid supplied path instead of switching checkouts. Substitute this root for `DROID_PLUGIN_ROOT` in upstream files. Use `tctl`, platform helpers, and the renderer with that checkout's atoms.
-
-Before using `tctl` on macOS, read [timestamp compatibility](references/macos-tctl.md).
-
-Without a usable upstream route, read only the relevant local fallback: [browser](references/browser-use.md), [desktop](references/desktop-use.md), [unrecorded TUI](references/terminal-use.md), or [evidence verification](references/verify.md). Use it only if it meets the original commitment. Mark the rest `BLOCKED` and continue independent checks.
+Native desktop testing is macOS-only and uses e2e. Use a fallback only if it meets the same platform, input, and evidence requirements. Report unsupported capabilities as `BLOCKED`; continue independent checks.

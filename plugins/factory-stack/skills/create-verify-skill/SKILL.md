@@ -14,13 +14,13 @@ Generate `.factory/skills/verify-<app>/` to launch the real app, drive a user's 
 
 Answer from code. Ask only what you cannot observe.
 
-- **Surface.** What does a user touch: a web UI, a CLI or TUI, a desktop app, an API, a library? Pick the primary one and note the rest.
+- **Surface.** Pick the primary user surface: web, mobile, native macOS, CLI/TUI, API, or library. Note secondary surfaces.
 - **Run.** The repo's own dev command (package scripts, Makefile, README), ports, env vars, seed data, auth.
-- **Drive.** Reuse the project's harness first. Otherwise use `droid-control` for driver mechanics in interactive apps, or plain HTTP for services.
+- **Drive.** Reuse the project's harness. For new UI routes use `droid-control`, which selects e2e for supported targets. Use plain HTTP for services.
 - **Observe.** Screenshots, terminal transcripts, response bodies, logs, exit codes, stored state.
 - **Isolate.** Can two instances run side by side (ports, data dirs, profiles)? If not, the generated skill says so and refuses to drive a shared instance.
 
-If the checkout does not build or start, fix that or report it precisely before generating.
+For missing prerequisites, follow [agent-owned setup](../droid-control/references/setup.md). If the checkout still does not build or start, fix that or report the blocker before generating.
 
 ## 2. Write the skill
 
@@ -28,9 +28,9 @@ Write `.factory/skills/verify-<app>/SKILL.md` with `name: verify-<app>` and a de
 
 - **Launch.** The exact command, how to tell it is ready to use (not just that a port answers), and teardown. Launch works from an empty data dir, including migrations and seed data. A short-lived CLI builds once, then runs each drive in its own PTY session.
 - **Doctor.** One read-only check: process up, right build, port owned by this run, auth valid. Run it first whenever anything looks off.
-- **Drive.** Name the driver and prerequisites. Write the app-specific recipe with real selectors and commands; refer to the driver skill for generic mechanics. Prefer stable handles (ARIA names, data attributes, prompt strings, routes) over coordinates.
+- **Drive.** Name the driver and prerequisites. Point to existing e2e config, target, and test selectors or commands rather than copying test steps. For unmapped journeys, give stable locators and exact assertions. Link to the driver for mechanics.
 - **Evidence.** Name the artifact type and path for each proof point, including any screenshots and recordings. Capture the real user action and result rather than using test endpoints or internal setters. Check side effects (files, rows, messages) as well as the screen. Verify what dry-run actually skips.
-- **Cleanup.** Use `droid-control`'s QA cleanup checklist for any surface. Specify how to finalize recorders, restore mutations, remove owned resources by exact ID after success or failure, and verify teardown and evidence survival.
+- **Cleanup.** Follow [QA cleanup](../droid-control/references/qa-cleanup.md) and document app-specific teardown, including owned session, device, or process IDs to capture and verify.
 - **Helpers.** Every script the skill ships is executable, and its invocation is shown in the body.
 
 ## 3. Seed the feature map
