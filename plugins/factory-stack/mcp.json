@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "e2e": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["--offline", "--no", "--", "e2e", "mcp"],
+      "env": {
+        "E2E_TELEMETRY_DISABLED": "1"
+      }
+    }
+  }
+}

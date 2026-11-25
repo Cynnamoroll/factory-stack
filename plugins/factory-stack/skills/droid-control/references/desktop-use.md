@@ -1,8 +1,0 @@
-# Native desktop
-
-1. Check `cua-driver --version`, `status`, and `doctor`. On macOS, the host needs user-approved Accessibility and Screen Recording grants. On Windows, use an interactive desktop, not Session 0. On Linux, use the target display/session bus and check the live compositor's capabilities, including Wayland. Ask before installing drivers, changing services, or broadening permissions.
-2. Discover the exact app and window with `list_apps` or `list_windows`; launch only when requested. Get `get_window_state` for the observed PID/window and run session. Use fresh element tokens or pixels from a valid image of that exact surface; check screenshot size and provenance first.
-3. Use background input where available. Read `cua-driver describe <operation>` for the live schema. Reobserve after each uncertain action and verify the app's state, not the driver's delivery response. Foreground input or desktop-wide scope requires approval. If focus, capture, permissions, or delivery are unclear, stop and resolve them before retrying. A native-only request rules out DOM/CDP, app APIs, and shell shortcuts.
-4. Finalize any owned recording and end the run session without stopping personal apps or shared services.
-
-For video, read the external `desktop-use` atom's recording contract. On macOS, check `check_permissions` with `{"prompt":false}` and confirm the result is attributed to the driver daemon, not the launching terminal. This checks grants, not live video capture. Verify a persistent MCP connection can query recorder state, then start, check, and stop your recording on that connection. A screenshot is not proof of video support. If the recorder is unavailable or owned by another run, report the blocker and preserve partial evidence.

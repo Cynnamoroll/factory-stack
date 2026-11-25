@@ -56,15 +56,12 @@ A user saves a titled note from the browser or the CLI, can cancel a draft, and 
 - The `n` key when focus is outside a text field.
 - `notes create --title <title> --body <body>` in a terminal.
 
-## Driving it with agent-browser
+## Driving it with e2e and the CLI
 
 Preconditions: the doctor passes and no note is titled `Release checklist`.
 
-- **Open editor.** Click the button named `New note`. A form named `Note editor` appears with focus in `Title`.
-- **Save.** Fill `Title` with `Release checklist` and `Body` with `Tag and publish`, then click `Save note`. A status named `Note saved` appears.
-- **Persistence.** Open `All notes`, then the `Release checklist` link. Both values show.
-- **CLI.** Run `notes create --title "CLI note" --body "From terminal" --format json`. Exit code 0, and stdout has the new ID.
-- **Proof.** Save an ARIA snapshot and a screenshot of the list to `artifacts/create-note/`.
+- **Web.** Run `npx --no e2e run tests/create-note.e2e.ts --target web`. Require `create-save` and `create-cancel` to pass on `web`. Check the report for the saved title and body from a reopened note, and the attached snapshot and screenshot.
+- **CLI.** Run `notes create --title "CLI note" --body "From terminal" --format json`. Require exit code 0 and the new ID in stdout. Check that ID in a read-only view.
 
 ## Gotchas
 

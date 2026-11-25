@@ -17,7 +17,7 @@ Pin the claim, build, input method, observable postconditions, and required arti
 
 Drive the change on the surface a user touches:
 
-- **Web, Electron, terminal, or native desktop:** Load `droid-control` for the matching project `verify-<app>` recipe, driver selection, and evidence.
+- **Web, mobile, Electron, terminal, or native macOS:** Load `droid-control` for the project recipe and driver.
 - **Other project recipe:** Follow the matching `verify-<app>` skill's Launch, Doctor, Drive, Evidence, and Cleanup sections.
 - **HTTP service:** Send the real request with `curl`.
 - **Library:** Import the built package and call the changed API as a consumer would.
@@ -26,14 +26,14 @@ Wrong surface or "inconclusive" is not a pass. Say which it was.
 
 ## 3. Run it
 
-1. Run relevant project tests. Rerun only what failed plus what the fix touched.
-2. Drive the action and observe its result. Check that every required screenshot, recording, or other artifact shows its promised proof points.
+1. Run relevant project tests. A test counts as the live drive when its target, actions, assertions, and evidence cover the claim. Rerun only failures and affected coverage.
+2. Drive uncovered proof points. Check that each required artifact shows its promised result.
 3. Check side effects as well as what is visible: files written, rows stored, messages sent.
 4. When a check fails, suspect the observation method first, then the system.
 
 Prefer a script that reruns the same comparison over a one-time look. Keep it under `/tmp/` unless it is worth committing as a regression test.
 
-For every surface, use `droid-control`'s QA cleanup checklist. Verify owned resources are gone and mutations restored on success or failure. Keep delivered proof accessible and report any cleanup blocker separately from what you observed.
+For every surface, follow [QA cleanup](../droid-control/references/qa-cleanup.md). Report cleanup blockers separately from observations.
 
 ## 4. When it fails
 

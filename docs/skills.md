@@ -19,7 +19,7 @@ Most skills can be selected by Droid or invoked directly. **Slash only** means t
 
 | Skill | Use it to… |
 | --- | --- |
-| [`droid-control`](../plugins/factory-stack/skills/droid-control/SKILL.md) | Drive a real app for standalone QA or capture screenshots and demos. |
+| [`droid-control`](../plugins/factory-stack/skills/droid-control/SKILL.md) | Run e2e on web, iOS, Android, or native macOS; drive terminals or capture demos. |
 | [`prove-it-works`](../plugins/factory-stack/skills/prove-it-works/SKILL.md) | Verify a change on the real user path before declaring it done. |
 | [`create-verify-skill`](../plugins/factory-stack/skills/create-verify-skill/SKILL.md) · Slash only | Create a project `verify-<app>` recipe and prove a mapped feature live. |
 | [`maintain-verify-skill`](../plugins/factory-stack/skills/maintain-verify-skill/SKILL.md) | Reconcile a project verification recipe with source and live behavior. |
