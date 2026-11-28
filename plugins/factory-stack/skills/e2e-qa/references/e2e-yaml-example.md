@@ -4,7 +4,7 @@ A worked example for a fictional notes project with a web app and a CLI. Copy th
 
 ```yaml
 # .factory/skills/qa/e2e.yaml
-# Maintained by adopt-e2e-qa and maintain-qa-skills. install-qa never writes this file.
+# Maintained by maintain-qa-skills. install-qa never writes this file.
 version: 1
 apps:
   web:

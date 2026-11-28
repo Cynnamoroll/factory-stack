@@ -1,10 +1,6 @@
 # QA integration
 
-Droid's built-in `install-qa` generates a `qa` orchestrator skill, `.factory/skills/qa/config.yaml`, `REPORT-TEMPLATE.md`, and one `qa-<app>` skill per app. Its generated text names Factory's droid-control plugin as the driver. `/adopt-e2e-qa` adds a managed block to those skills that hands the driver role to this skill, and keeps the e2e mapping in `.factory/skills/qa/e2e.yaml`, a file `install-qa` never writes.
-
-## Check the wiring
-
-Before the first flow of a run, run the wiring check named at the top of `SKILL.md`. Exit 0 means the wiring is current. On exit 1 (for example after `/install-qa` reran), keep acting as the driver for this run and add an Action Required line telling the user to run `/adopt-e2e-qa`. Exit 2 means a file could not be parsed; report `BLOCKED` with that error rather than guessing its settings. Exit 3 means there are no generated QA skills; route without them.
+Droid's built-in `install-qa` generates a `qa` orchestrator skill, `.factory/skills/qa/config.yaml`, `REPORT-TEMPLATE.md`, and one `qa-<app>` skill per app. Those skills define what to test. This skill drives every interactive flow they select, whatever driver plugin their generated text names. The e2e mapping lives in `.factory/skills/qa/e2e.yaml`, which `maintain-qa-skills` writes and `install-qa` never touches. Treat edited or composed video settings in `config.yaml` as off.
 
 ## Who owns what
 
@@ -69,4 +65,4 @@ There is no human in CI. [Agent-owned setup](setup.md) cannot ask, so report a m
 - `tuistory` for terminal apps, plus `asciinema` when `video_evidence` is true
 - `ffmpeg` when `video_evidence` is true, for recording checks
 
-It never needs droid-control, `agg`, or Remotion.
+It never needs `agg` or Remotion.

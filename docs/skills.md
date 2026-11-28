@@ -19,10 +19,9 @@ Most skills can be selected by Droid or invoked directly. **Slash only** means t
 
 | Skill | Use it to… |
 | --- | --- |
-| [`e2e-qa`](../plugins/factory-stack/skills/e2e-qa/SKILL.md) | Drive real apps with e2e on web, iOS, Android, or native macOS, and with `tuistory` or `agent-browser` elsewhere. The driver for `install-qa`'s qa skills. |
+| [`e2e-qa`](../plugins/factory-stack/skills/e2e-qa/SKILL.md) | Drive real apps with e2e on web, iOS, Android, or native macOS, and with `tuistory` or `agent-browser` elsewhere. Drives the flows in `install-qa`'s qa skills. |
 | [`prove-it-works`](../plugins/factory-stack/skills/prove-it-works/SKILL.md) | Verify a change on the real user path before declaring it done. |
-| [`adopt-e2e-qa`](../plugins/factory-stack/skills/adopt-e2e-qa/SKILL.md) · Slash only | Wire `install-qa`'s qa skills to `e2e-qa`, map flows to e2e tests, and prove one flow live. Rerun after `/install-qa`. |
-| [`maintain-qa-skills`](../plugins/factory-stack/skills/maintain-qa-skills/SKILL.md) | Reconcile `qa-<app>` flows and the e2e mapping with source and live behavior. |
+| [`maintain-qa-skills`](../plugins/factory-stack/skills/maintain-qa-skills/SKILL.md) | Create and reconcile the e2e mapping for `qa-<app>` flows against source and live behavior. |
 | [`adversarial-review`](../plugins/factory-stack/skills/adversarial-review/SKILL.md) | Stress-test a risky diff from independent angles and keep only reproduced findings. |
 | [`check-blast-radius`](../plugins/factory-stack/skills/check-blast-radius/SKILL.md) | Reproduce fallout outside the changed code. |
 | [`add-guardrail`](../plugins/factory-stack/skills/add-guardrail/SKILL.md) · Slash only | Turn a recurring mistake into an enforced check or rule. |

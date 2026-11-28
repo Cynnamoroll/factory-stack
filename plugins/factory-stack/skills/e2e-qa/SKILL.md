@@ -1,6 +1,6 @@
 ---
 name: e2e-qa
-description: "Drive real apps for QA and verification: e2e on web, iOS, Android, and native macOS, built-in tuistory for terminals, and built-in agent-browser for browser panes and Electron. Serves as the interaction layer for install-qa's qa skills in place of droid-control."
+description: "Drive real apps for QA and verification: e2e on web, iOS, Android, and native macOS, built-in tuistory for terminals, and built-in agent-browser for browser panes and Electron. Drives the flows in install-qa's qa skills."
 license: MIT
 compatibility: droid
 version: 0.2.0
@@ -8,7 +8,7 @@ version: 0.2.0
 
 # e2e QA
 
-This skill's directory is `${DROID_PLUGIN_ROOT}/skills/e2e-qa`. The QA wiring check is `python3 "${DROID_PLUGIN_ROOT}/skills/adopt-e2e-qa/scripts/rewire.py" --check`, run from the repository root.
+This skill's directory is `${DROID_PLUGIN_ROOT}/skills/e2e-qa`.
 
 1. **Commit.** Pin the build, target, persona, method, postconditions, and artifacts. Compare only real builds with identical actions.
 2. **Route.** Honor the requested method. When `.factory/skills/qa/config.yaml` exists, follow [QA integration](references/qa-integration.md): the generated `qa` and `qa-<app>` skills own scope, personas, environments, and the report, and this skill owns driving, evidence, and cleanup. Without them, reuse a matching project test or select a driver below. If called for mechanics, stay on that step.
