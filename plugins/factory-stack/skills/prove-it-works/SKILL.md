@@ -17,8 +17,8 @@ Pin the claim, build, input method, observable postconditions, and required arti
 
 Drive the change on the surface a user touches:
 
-- **Web, mobile, Electron, terminal, or native macOS:** Load `e2e-qa` for the project recipe and driver. It routes browser panes, Electron, and terminals to Droid's built-in drivers.
-- **Other project recipe:** Follow the matching `verify-<app>` skill's Launch, Doctor, Drive, Evidence, and Cleanup sections.
+- **Project QA skills:** When `.factory/skills/qa/config.yaml` exists, pick the flows in the affected `qa-<app>` skills (by `path_patterns`) that cover the claim and run them through `e2e-qa` for the personas the claim involves. If no flow covers the claim, add a live drive of the changed behavior.
+- **Web, mobile, Electron, terminal, or native macOS without QA skills:** Load `e2e-qa` for the driver. It routes browser panes, Electron, and terminals to Droid's built-in drivers.
 - **HTTP service:** Send the real request with `curl`.
 - **Library:** Import the built package and call the changed API as a consumer would.
 
