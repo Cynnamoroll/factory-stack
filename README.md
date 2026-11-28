@@ -21,22 +21,28 @@ Start a new Droid session and run `/skills`. Use `--scope project` to install fo
 | Find out why a decision was made | `/explain-why login retries were added` |
 | Reproduce, fix, and verify a bug | `/fix-bug the login timeout` |
 | Verify a change on the real user path | `/prove-it-works saving a draft survives reload` |
-| Run standalone QA or capture a demo | `/droid-control save a draft and capture before and after screenshots` |
+| Set up project QA on e2e | `/setup-e2e-qa` |
+| Run standalone QA with screenshots | `/e2e-qa save a draft and capture before and after screenshots` |
 | Open a verified pull request | `/ship-pr` |
 
 Droid can also pick most skills from a natural-language request. See the [full skill catalog](docs/skills.md) for every skill, optional tools, and which commands require explicit invocation.
 
-## Set up Droid Control
+## Set up e2e QA
 
-`/droid-control` reuses your project's `verify-<app>` recipe or tests. It uses [e2e](https://github.com/e2e-inc/e2e) for web, iOS, Android, and native macOS testing. Windows and Linux native desktop apps are out of scope. Use `agent-browser` for the Factory browser pane or Electron renderer, and `tuistory` for unrecorded terminal flows.
+`e2e-qa` drives real apps with [e2e](https://github.com/e2e-inc/e2e) on web, iOS, Android, and native macOS. It uses Droid's built-in `tuistory` for terminal apps and `agent-browser` for the Factory browser pane and Electron renderers. Windows and Linux native desktop apps are out of scope.
 
-Start Droid from the app project. The plugin registers `e2e` in `/mcp` and resolves the runner offline without installing it. If prerequisites are missing, Droid asks for approval, then installs and verifies them and continues the task. See [e2e setup](plugins/factory-stack/skills/droid-control/references/e2e-setup.md) for prerequisites.
+Start Droid from the app project. The plugin registers `e2e` in `/mcp` and resolves the runner offline without installing it. If prerequisites are missing, Droid asks for approval, then installs and verifies them and continues the task. See [e2e setup](plugins/factory-stack/skills/e2e-qa/references/e2e-setup.md) for prerequisites.
 
-For terminal recordings, byte capture, real emulator setup, or produced video, Droid can set up a separate checkout of the [original Factory helpers](https://github.com/Factory-AI/factory-plugins/tree/master/plugins/droid-control) after approval. It does not register that checkout as a plugin.
+### Project QA
 
-For a different location, set `DROID_CONTROL_HELPERS_ROOT` to the absolute `plugins/droid-control` directory, or pass that path in the request. See the [macOS `tctl` compatibility note](plugins/factory-stack/skills/droid-control/references/macos-tctl.md) before using older terminal helpers on macOS.
+Run `/setup-e2e-qa` in the app project. It analyzes the codebase, asks about environments, personas, and flows, and generates:
 
-If another installed plugin exposes `/droid-control`, disable that plugin in its configured scope and restart Droid. See [Factory's plugin settings guide](https://docs.factory.com/harness/plugins) for team setup and plugin enablement.
+- a `qa` orchestrator skill, run with `/qa`
+- one `qa-<app>` flow menu per app
+- `.factory/skills/qa/config.yaml` and `.factory/skills/qa/e2e.yaml`, which maps each flow to an e2e test or a live drive
+- an optional GitHub Actions or GitLab CI job that posts one report per pull request
+
+Every interactive flow runs through `e2e-qa`. Use `/setup-e2e-qa` instead of Droid's built-in `/install-qa`, whose generated skills use a different driver. Rerun `/setup-e2e-qa` when personas, environments, or CI change, and use `maintain-qa-skills` when features change. `prove-it-works` also runs the matching `qa-<app>` flows.
 
 ## Update
 
@@ -49,6 +55,6 @@ Use the same marketplace name and scope you installed with. Start a new Droid se
 
 ## Contribute
 
-Follow [Factory's skills guide](https://docs.factory.com/harness/skills). Keep each skill's trigger distinct and its completion criteria checkable. Update the [catalog](docs/skills.md) when a skill is added or its purpose changes.
+Follow [Factory's skills guide](https://docs.factory.com/harness/skills). Keep each skill's trigger distinct and its completion criteria checkable. Do not duplicate a skill Droid ships built in (see `/skills`, **Built-in** tab); call it from your skill and add a "use X for Y" boundary to the description instead. Update the [catalog](docs/skills.md) when a skill is added or its purpose changes.
 
 [MIT License](LICENSE)

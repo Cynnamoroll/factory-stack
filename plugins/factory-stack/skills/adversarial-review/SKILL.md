@@ -1,13 +1,13 @@
 ---
 name: adversarial-review
-description: "Review risky diffs from independent angles; report only reproduced failures. Use check-blast-radius for fallout outside the diff."
+description: "Stress-test a risky diff from independent angles and report only failures reproduced by a run. For routine diff review, use review or /review; for fallout outside the diff, use check-blast-radius."
 license: MIT
 compatibility: droid
 ---
 
 # Adversarial review
 
-Report only failures proved by a run. This review does not apply fixes.
+Report only failures proved by a run. This review does not apply fixes. For a routine diff without a risky change, run Droid's `/review` instead.
 
 ## 1. Frame
 

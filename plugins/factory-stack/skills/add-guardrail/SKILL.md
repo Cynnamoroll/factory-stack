@@ -15,7 +15,7 @@ Make the mistake impossible to repeat. Assume contributors see only opened files
 Gather the corrections from one of these sources:
 
 - this session
-- past sessions: `droid search "<phrase>" --kind message_text --json`, then read the matching turns
+- past sessions: find them with Droid's built-in `session-navigation` skill, then read the matching turns
 - recent commits, reverts, review comments, and `AGENTS.md`
 
 Group corrections into classes with at least two occurrences. Show each class's evidence.
@@ -41,7 +41,7 @@ Show each new check failing on a real past instance of the mistake, then passing
 - hook: pipe a sample payload into the script and check the exit code, for example `echo '{"tool_name":"Edit","tool_input":{"file_path":"gen/x.ts"}}' | .factory/hooks/protect.sh; echo $?`
 - permission rule: `droid rules check --command '<bad command>'` reports the decision, and `droid rules check` passes its self-tests
 
-If a check does not fail on the real mistake, fix the check, not the example. Hooks load at session start, so tell the user to review the new hook in `/hooks` and start a new session.
+If a check does not fail on the real mistake, fix the check, not the example. Droid reloads hooks when `.factory/hooks.json` changes, so the hook is live at once. Tell the user to review it in `/hooks`.
 
 ## 4. Record it
 

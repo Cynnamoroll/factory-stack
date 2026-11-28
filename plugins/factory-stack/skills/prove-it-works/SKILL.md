@@ -1,6 +1,6 @@
 ---
 name: prove-it-works
-description: "Verify a code change in the real system before declaring done. Use droid-control for standalone QA or demos, /review for diffs."
+description: "Verify a code change in the real system before declaring done. Use e2e-qa for standalone QA, /review for diffs."
 license: MIT
 compatibility: droid
 ---
@@ -17,8 +17,8 @@ Pin the claim, build, input method, observable postconditions, and required arti
 
 Drive the change on the surface a user touches:
 
-- **Web, mobile, Electron, terminal, or native macOS:** Load `droid-control` for the project recipe and driver.
-- **Other project recipe:** Follow the matching `verify-<app>` skill's Launch, Doctor, Drive, Evidence, and Cleanup sections.
+- **Project QA skills:** When `.factory/skills/qa/config.yaml` exists, pick the flows in the affected `qa-<app>` skills (by `path_patterns`) that cover the claim and run them through `e2e-qa` for the personas the claim involves. If no flow covers the claim, add a live drive of the changed behavior.
+- **Web, mobile, Electron, terminal, or native macOS without QA skills:** Load `e2e-qa` for the driver. It routes browser panes, Electron, and terminals to Droid's built-in drivers.
 - **HTTP service:** Send the real request with `curl`.
 - **Library:** Import the built package and call the changed API as a consumer would.
 
@@ -33,7 +33,7 @@ Wrong surface or "inconclusive" is not a pass. Say which it was.
 
 Prefer a script that reruns the same comparison over a one-time look. Keep it under `/tmp/` unless it is worth committing as a regression test.
 
-For every surface, follow [QA cleanup](../droid-control/references/qa-cleanup.md). Report cleanup blockers separately from observations.
+For every surface, follow [QA cleanup](../e2e-qa/references/qa-cleanup.md). Report cleanup blockers separately from observations.
 
 ## 4. When it fails
 
