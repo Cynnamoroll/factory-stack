@@ -5,11 +5,11 @@ Older revisions of Factory's `bin/tctl` use `date +%s%3N` for deadlines. Stock m
 If the selected helper still uses that expression directly in deadline arithmetic and `date +%s%3N` does not return decimal epoch milliseconds, use the [bundled patch](../compat/macos/tctl-timestamp.patch). Apply it only in a clean, dedicated helper checkout outside this project. If the supplied root is shared or installed, use a separate checkout of the same trusted revision; do not edit the supplied root. Check that `/usr/bin/perl -MTime::HiRes -e 1` succeeds.
 
 ```sh
-git -C "$FACTORY_PLUGINS_CHECKOUT" apply --check "$DROID_CONTROL_SKILL_ROOT/compat/macos/tctl-timestamp.patch" &&
-git -C "$FACTORY_PLUGINS_CHECKOUT" apply "$DROID_CONTROL_SKILL_ROOT/compat/macos/tctl-timestamp.patch"
+git -C "$FACTORY_PLUGINS_CHECKOUT" apply --check "$E2E_QA_SKILL_ROOT/compat/macos/tctl-timestamp.patch" &&
+git -C "$FACTORY_PLUGINS_CHECKOUT" apply "$E2E_QA_SKILL_ROOT/compat/macos/tctl-timestamp.patch"
 ```
 
-Set both roots to the resolved absolute skill and repository directories. Use `plugins/droid-control` from that patched checkout for the entire route, including teardown. Skip the patch when the selected helper already has the fix or the active `date` supports the format. If preflight or the patch check fails, do not force-apply it; report the affected route `BLOCKED`. Verify the named session is gone after `close` and the promised evidence still opens.
+Set `E2E_QA_SKILL_ROOT` to the skill directory named at the top of `SKILL.md`, and `FACTORY_PLUGINS_CHECKOUT` to the absolute checkout directory. Use `plugins/droid-control` from that patched checkout for the entire route, including teardown. Skip the patch when the selected helper already has the fix or the active `date` supports the format. If preflight or the patch check fails, do not force-apply it; report the affected route `BLOCKED`. Verify the named session is gone after `close` and the promised evidence still opens.
 
 The patch matches the helper change in [the tested fork commit](https://github.com/Cynnamoroll/factory-plugins/commit/70f7312bcda31a1721c047aadea23a66ae0994c2). A trusted checkout of that commit already includes the fix.
 

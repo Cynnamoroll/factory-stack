@@ -26,8 +26,9 @@ Log decisions, verified units, reverts and triggers, and blockers, not every act
 
 ## 3. Pick the wake
 
-- For an event (CI, a merge, a long build), run the waiting command in the background so Droid wakes you when it ends, and add a `Loop` heartbeat as a fallback.
-- With no event, use a `Loop` interval sized to when a result is worth checking.
+- For an event (CI, a merge, a long build), run the waiting command in the background so Droid wakes you when it ends, and add a `loop_create` heartbeat as a fallback.
+- With no event, use a `loop_create` interval sized to when a result is worth checking.
+- Cancel the loop with `loop_cancel` when the run finishes or pauses.
 
 Droid keeps the plan and the approved spec through compaction. The log keeps everything else.
 

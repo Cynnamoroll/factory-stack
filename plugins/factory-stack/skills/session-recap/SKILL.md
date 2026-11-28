@@ -1,6 +1,6 @@
 ---
 name: session-recap
-description: "Recap prior work, current status, and decisions still waiting on the user. Use session-navigation to search or resume sessions."
+description: "Recap prior work, current status, and decisions still waiting on the user. To list, search, or resume sessions, use session-navigation."
 license: MIT
 compatibility: droid
 allowed-tools:
@@ -8,6 +8,7 @@ allowed-tools:
   - Grep
   - Glob
   - Execute
+  - Skill
 ---
 
 # Session recap
@@ -17,7 +18,7 @@ Recap every pending user call so the reply alone supports a decision. Assume the
 ## 1. Gather
 
 - **This session.** Your work since the user's last message, subagent reports, and the current state of each branch, PR, CI run, or worktree the session touched (`git status`, `git log`, `gh pr view`).
-- **Past sessions.** `droid search "<topic>" --json` finds them. Read the matching turns. If the user wants to continue one, point them at `droid resume`.
+- **Past sessions.** Find them with Droid's built-in `session-navigation` skill, then read the matching turns. Resuming a session is its job, not this recap's.
 
 Check each number you will show against its source.
 

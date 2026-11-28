@@ -1,6 +1,6 @@
 ---
 name: maintain-verify-skill
-description: "Refresh a project's verify-<app> recipe after feature changes. Use droid-control for a one-off QA flow."
+description: "Refresh a project's verify-<app> recipe after feature changes. Not for QA skills from install-qa; use e2e-qa for a one-off QA flow."
 license: MIT
 compatibility: droid
 ---
@@ -21,9 +21,9 @@ Edit only the verify skill's directory (`SKILL.md`, `features/`, and owned scrip
 4. **Reconcile.** Account for every feature. Combine recipes that share app state and check cited drift. Check `git log --since=<last sync>` for missing user-facing surfaces; require a source path for each.
 5. **Live pass.** Follow the recipe serially, even when source looks clean. Check coverage by journey and target. Require each mapped e2e test to pass on its intended target; drive every unmapped journey:
    - Run the doctor before the first drive, on each fresh session, and after any failed or surprising drive. If the doctor cannot see the problem, reset or relaunch.
-   - Follow [QA cleanup](../droid-control/references/qa-cleanup.md) after each attempt. Add missing app-specific teardown to the recipe.
+   - Follow [QA cleanup](../e2e-qa/references/qa-cleanup.md) after each attempt. Add missing app-specific teardown to the recipe.
 
-   Use [agent-owned setup](../droid-control/references/setup.md) for missing prerequisites. Fix doctor failures caused by recipe drift and retry once. A feature is `verified-unreachable` only with the concrete prerequisite and the route you tried.
+   Use [agent-owned setup](../e2e-qa/references/setup.md) for missing prerequisites. Fix doctor failures caused by recipe drift and retry once. A feature is `verified-unreachable` only with the concrete prerequisite and the route you tried.
 6. **Triage.** Wrong or missing user-facing description: fix the doc. Working behavior the harness cannot drive: fix the harness and drive it again. App behavior that is broken: record it for the user and keep it out of this change.
 
 ## Done when

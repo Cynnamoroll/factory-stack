@@ -19,15 +19,15 @@ Most skills can be selected by Droid or invoked directly. **Slash only** means t
 
 | Skill | Use it to… |
 | --- | --- |
-| [`droid-control`](../plugins/factory-stack/skills/droid-control/SKILL.md) | Run e2e on web, iOS, Android, or native macOS; drive terminals or capture demos. |
+| [`e2e-qa`](../plugins/factory-stack/skills/e2e-qa/SKILL.md) | Run e2e on web, iOS, Android, or native macOS. Hands browser panes, terminals, and demo video to `agent-browser`, `tuistory`, and Factory's `droid-control` plugin. |
 | [`prove-it-works`](../plugins/factory-stack/skills/prove-it-works/SKILL.md) | Verify a change on the real user path before declaring it done. |
-| [`create-verify-skill`](../plugins/factory-stack/skills/create-verify-skill/SKILL.md) · Slash only | Create a project `verify-<app>` recipe and prove a mapped feature live. |
+| [`create-verify-skill`](../plugins/factory-stack/skills/create-verify-skill/SKILL.md) · Slash only | Create a project `verify-<app>` recipe for `prove-it-works`, reusing any `install-qa` skill. |
 | [`maintain-verify-skill`](../plugins/factory-stack/skills/maintain-verify-skill/SKILL.md) | Reconcile a project verification recipe with source and live behavior. |
-| [`adversarial-review`](../plugins/factory-stack/skills/adversarial-review/SKILL.md) | Review a risky diff from independent angles and reproduce findings. |
+| [`adversarial-review`](../plugins/factory-stack/skills/adversarial-review/SKILL.md) | Stress-test a risky diff from independent angles and keep only reproduced findings. |
 | [`check-blast-radius`](../plugins/factory-stack/skills/check-blast-radius/SKILL.md) | Reproduce fallout outside the changed code. |
 | [`add-guardrail`](../plugins/factory-stack/skills/add-guardrail/SKILL.md) · Slash only | Turn a recurring mistake into an enforced check or rule. |
 
-Project verification recipes live in `.factory/skills/verify-<app>/`, not in the plugin. Use Droid's `/review` for a routine diff review and `simplify` for code quality and reuse.
+Project verification recipes live in `.factory/skills/verify-<app>/`, not in the plugin. Use Droid's `/review` for a routine diff review, `simplify` for code quality and reuse, and `install-qa` for a QA suite with CI.
 
 ## Measure and model
 
@@ -48,9 +48,9 @@ The TLA+ skills need the TLC model checker. Models belong in the project.
 | [`dev-workflow`](../plugins/factory-stack/skills/dev-workflow/SKILL.md) | Set autonomy, communication, and delegation rules for a coding session. |
 | [`engineering-principles`](../plugins/factory-stack/skills/engineering-principles/SKILL.md) · Hidden | Load the principle that informs a coding or review decision. |
 | [`ship-pr`](../plugins/factory-stack/skills/ship-pr/SKILL.md) · Slash only | Verify an isolated PR branch, simplify the diff, and open a PR. |
-| [`watch-pr`](../plugins/factory-stack/skills/watch-pr/SKILL.md) · Slash only | Triage reviews and CI on an open PR until it is merge-ready or blocked. |
+| [`watch-pr`](../plugins/factory-stack/skills/watch-pr/SKILL.md) · Slash only | Watch an open PR or stack until it is merge-ready, running `fix-pull-request` on each fixable wake. |
 | [`unattended-run`](../plugins/factory-stack/skills/unattended-run/SKILL.md) · Slash only | Run a defined task unattended with resumable checkpoints. |
-| [`session-recap`](../plugins/factory-stack/skills/session-recap/SKILL.md) | Recap prior work, current status, and decisions waiting on the user. |
+| [`session-recap`](../plugins/factory-stack/skills/session-recap/SKILL.md) | Recap prior work, current status, and decisions waiting on the user. Use `session-navigation` to find or resume sessions. |
 
 `ship-pr` and `watch-pr` need an authenticated `gh` CLI. Skills that spawn `droid exec` may need `FACTORY_API_KEY` in the shell if the run cannot authenticate.
 
