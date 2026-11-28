@@ -19,14 +19,15 @@ Most skills can be selected by Droid or invoked directly. **Slash only** means t
 
 | Skill | Use it to… |
 | --- | --- |
-| [`e2e-qa`](../plugins/factory-stack/skills/e2e-qa/SKILL.md) | Drive real apps with e2e on web, iOS, Android, or native macOS, and with `tuistory` or `agent-browser` elsewhere. Drives the flows in `install-qa`'s qa skills. |
+| [`e2e-qa`](../plugins/factory-stack/skills/e2e-qa/SKILL.md) | Drive real apps with e2e on web, iOS, Android, or native macOS, and with `tuistory` or `agent-browser` elsewhere. Drives every flow in the project's QA skills. |
 | [`prove-it-works`](../plugins/factory-stack/skills/prove-it-works/SKILL.md) | Verify a change on the real user path before declaring it done. |
-| [`maintain-qa-skills`](../plugins/factory-stack/skills/maintain-qa-skills/SKILL.md) | Create and reconcile the e2e mapping for `qa-<app>` flows against source and live behavior. |
+| [`setup-e2e-qa`](../plugins/factory-stack/skills/setup-e2e-qa/SKILL.md) · Slash only | Generate the project's `qa` and `qa-<app>` skills, config, e2e mapping, and optional CI, all driven by `e2e-qa`. Use instead of `/install-qa`. |
+| [`maintain-qa-skills`](../plugins/factory-stack/skills/maintain-qa-skills/SKILL.md) | Reconcile `qa-<app>` flows and the e2e mapping with source and live behavior. |
 | [`adversarial-review`](../plugins/factory-stack/skills/adversarial-review/SKILL.md) | Stress-test a risky diff from independent angles and keep only reproduced findings. |
 | [`check-blast-radius`](../plugins/factory-stack/skills/check-blast-radius/SKILL.md) | Reproduce fallout outside the changed code. |
 | [`add-guardrail`](../plugins/factory-stack/skills/add-guardrail/SKILL.md) · Slash only | Turn a recurring mistake into an enforced check or rule. |
 
-Project QA skills come from Droid's `/install-qa` and live in `.factory/skills/qa/` and `.factory/skills/qa-<app>/`. The e2e mapping lives in `.factory/skills/qa/e2e.yaml`. Use Droid's `/review` for a routine diff review and `simplify` for code quality and reuse.
+Project QA skills come from `/setup-e2e-qa` and live in `.factory/skills/qa/` and `.factory/skills/qa-<app>/`. The e2e mapping lives in `.factory/skills/qa/e2e.yaml`. Use Droid's `/review` for a routine diff review and `simplify` for code quality and reuse.
 
 ## Measure and model
 

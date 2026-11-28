@@ -1,6 +1,6 @@
 # QA integration
 
-Droid's built-in `install-qa` generates a `qa` orchestrator skill, `.factory/skills/qa/config.yaml`, `REPORT-TEMPLATE.md`, and one `qa-<app>` skill per app. Those skills define what to test. This skill drives every interactive flow they select, whatever driver plugin their generated text names. The e2e mapping lives in `.factory/skills/qa/e2e.yaml`, which `maintain-qa-skills` writes and `install-qa` never touches. Treat edited or composed video settings in `config.yaml` as off.
+`/setup-e2e-qa` generates a `qa` orchestrator skill, `.factory/skills/qa/config.yaml`, `.factory/skills/qa/e2e.yaml`, `REPORT-TEMPLATE.md`, and one `qa-<app>` skill per app. Those skills define what to test; this skill drives every interactive flow they select. If a QA skill or config names any other driver or plugin, ignore it, drive through this skill, and add an Action Required line telling the user to rerun `/setup-e2e-qa`.
 
 ## Who owns what
 
@@ -13,10 +13,10 @@ Never change the report format or upload rules. Return results and evidence to t
 
 Read both files on every run; never reuse values from an earlier run.
 
-- `config.yaml`: `default_target`, `environments` and their `restrictions`, `personas` with `credentials_source` and `secret_name`, `apps.<app>` (`path_patterns`, `test_tool`, `build_command`), `cleanup`, `video_evidence`, and `platform`. Resolve secrets at run time; never print them or put them in evidence.
+- `config.yaml`: `default_target`, `environments` and their `restrictions`, `personas` with `credentials_source` and `secret_name`, `apps.<app>` (`kind`, `path_patterns`, `build_command`, `dev_command`), `cleanup`, `video_evidence`, and `platform`. Resolve secrets at run time; never print them or put them in evidence.
 - `e2e.yaml`: per app, `driver` (`e2e`, `tuistory`, `agent-browser`, or `curl`), the e2e `config` path and `target`, and `flows`, which maps each flow label in `qa-<app>` to a test (`file` or `file:line`) or `null`.
 
-If an app has no `e2e.yaml` entry, fall back on `test_tool`: `tuistory` and `curl` keep their driver; `agent-browser` uses e2e when the project has an e2e config for that app, otherwise `agent-browser`.
+If an app has no `e2e.yaml` entry, pick its driver from `kind` with the table in `SKILL.md`, drive its flows live, and report the missing entry for `maintain-qa-skills`.
 
 ## Run a flow
 

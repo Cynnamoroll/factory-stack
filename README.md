@@ -1,6 +1,6 @@
 # factory-stack
 
-25 skills and a custom droid for Factory's Droid CLI. Use them to understand code, fix bugs, verify behavior in the real app, and prepare pull requests.
+26 skills and a custom droid for Factory's Droid CLI. Use them to understand code, fix bugs, verify behavior in the real app, and prepare pull requests.
 
 ## Install
 
@@ -21,6 +21,7 @@ Start a new Droid session and run `/skills`. Use `--scope project` to install fo
 | Find out why a decision was made | `/explain-why login retries were added` |
 | Reproduce, fix, and verify a bug | `/fix-bug the login timeout` |
 | Verify a change on the real user path | `/prove-it-works saving a draft survives reload` |
+| Set up project QA on e2e | `/setup-e2e-qa` |
 | Run standalone QA with screenshots | `/e2e-qa save a draft and capture before and after screenshots` |
 | Open a verified pull request | `/ship-pr` |
 
@@ -32,11 +33,16 @@ Droid can also pick most skills from a natural-language request. See the [full s
 
 Start Droid from the app project. The plugin registers `e2e` in `/mcp` and resolves the runner offline without installing it. If prerequisites are missing, Droid asks for approval, then installs and verifies them and continues the task. See [e2e setup](plugins/factory-stack/skills/e2e-qa/references/e2e-setup.md) for prerequisites.
 
-### Project QA with install-qa
+### Project QA
 
-Droid's built-in `/install-qa` generates a `qa` skill, one `qa-<app>` skill per app, and an optional CI job. `e2e-qa` drives the flows those skills define, and `/qa` and `prove-it-works` route interactive flows through it.
+Run `/setup-e2e-qa` in the app project. It analyzes the codebase, asks about environments, personas, and flows, and generates:
 
-Run `maintain-qa-skills` to map each app and flow to an e2e test in `.factory/skills/qa/e2e.yaml`, and again when features change. `/install-qa` never writes that file, so the mapping survives reruns.
+- a `qa` orchestrator skill, run with `/qa`
+- one `qa-<app>` flow menu per app
+- `.factory/skills/qa/config.yaml` and `.factory/skills/qa/e2e.yaml`, which maps each flow to an e2e test or a live drive
+- an optional GitHub Actions or GitLab CI job that posts one report per pull request
+
+Every interactive flow runs through `e2e-qa`. Use `/setup-e2e-qa` instead of Droid's built-in `/install-qa`, whose generated skills use a different driver. Rerun `/setup-e2e-qa` when personas, environments, or CI change, and use `maintain-qa-skills` when features change. `prove-it-works` also runs the matching `qa-<app>` flows.
 
 ## Update
 

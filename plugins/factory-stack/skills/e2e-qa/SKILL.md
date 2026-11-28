@@ -1,6 +1,6 @@
 ---
 name: e2e-qa
-description: "Drive real apps for QA and verification: e2e on web, iOS, Android, and native macOS, built-in tuistory for terminals, and built-in agent-browser for browser panes and Electron. Drives the flows in install-qa's qa skills."
+description: "Drive real apps for QA and verification: e2e on web, iOS, Android, and native macOS, built-in tuistory for terminals, and built-in agent-browser for browser panes and Electron. Drives every flow in the QA skills that /setup-e2e-qa generates."
 license: MIT
 compatibility: droid
 version: 0.2.0

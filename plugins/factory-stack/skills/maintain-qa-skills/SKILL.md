@@ -1,6 +1,6 @@
 ---
 name: maintain-qa-skills
-description: "Create the e2e mapping for install-qa's qa-<app> flows, and reconcile flow menus and mapping with source and live behavior after features change. For one QA run, use /qa."
+description: "Reconcile the qa-<app> flow menus and the e2e mapping from /setup-e2e-qa with source and live behavior after features change. For one QA run, use /qa; for first-time setup, use /setup-e2e-qa."
 license: MIT
 compatibility: droid
 ---
@@ -11,12 +11,12 @@ Keep the generated `qa-<app>` flow menus and `.factory/skills/qa/e2e.yaml` true 
 
 ## Edit scope
 
-Edit only `.factory/skills/qa-*/SKILL.md` (flow menus and Known Failure Modes) and `.factory/skills/qa/e2e.yaml`. A rerun of `/install-qa` regenerates the `qa-*` files, so say which edits it would overwrite. `e2e.yaml` survives it. Changes to personas, environments, or CI belong to `/install-qa`; report them instead. Report product regressions without editing product code.
+Edit only `.factory/skills/qa-*/SKILL.md` (flow menus and Known Failure Modes) and `.factory/skills/qa/e2e.yaml`. A rerun of `/setup-e2e-qa` carries flow menus, Known Failure Modes, and `e2e.yaml` forward unless the user starts fresh. Changes to personas, environments, or CI belong to `/setup-e2e-qa`; report them instead. Report product regressions without editing product code.
 
 ## Pass
 
-1. **Find the target.** `.factory/skills/qa/config.yaml` with its `qa-<app>` skills. None: stop and point at `/install-qa`.
-2. **Mapping.** If `e2e.yaml` is missing, create it in the shape of [the e2e.yaml example](../e2e-qa/references/e2e-yaml-example.md). Pick each app's driver: `e2e` for web, iOS, Android, and native macOS; `tuistory` for CLI and TUI; `agent-browser` for an Electron renderer or the Factory browser pane; `curl` for an API. For each `e2e` app, find or [set up](../e2e-qa/references/setup.md) its config and target. Map a flow label to a test (`file` or `file:line`) only when that test drives the flow and asserts its success criteria; otherwise map it to `null`. Never map a test because its name looks similar.
+1. **Find the target.** `.factory/skills/qa/config.yaml` with its `qa-<app>` skills. None: stop and point at `/setup-e2e-qa`.
+2. **Mapping.** If `e2e.yaml` is missing or names a driver outside the list below, rebuild it in the shape of [the e2e.yaml example](../e2e-qa/references/e2e-yaml-example.md). Pick each app's driver: `e2e` for web, iOS, Android, and native macOS; `tuistory` for CLI and TUI; `agent-browser` for an Electron renderer or the Factory browser pane; `curl` for an API. For each `e2e` app, find or [set up](../e2e-qa/references/setup.md) its config and target. Map a flow label to a test (`file` or `file:line`) only when that test drives the flow and asserts its success criteria; otherwise map it to `null`. Never map a test because its name looks similar.
 3. **Index hygiene.** Every app in `config.yaml` has a `qa-<app>` skill and an `e2e.yaml` entry. Every flow label in a `qa-<app>` menu appears in `e2e.yaml`, and every `e2e.yaml` label exists in its menu. Every mapped test file and test still exists. Fix missing, extra, duplicate, or dead entries.
 4. **Source pass.** Group flows by the app's `path_patterns`. Read small groups inline; give each independent `explorer` only its paths and flow list. Require one row per flow: current behavior, cited drift, and whether its mapped test still asserts the success criteria. Check `git log --since=<last sync>` for user-facing surfaces no flow covers; require a source path for each. Explorers do not drive the app.
 5. **Pending suggestions.** Read the Suggested Skill Updates in the latest `qa-results/report.md` or QA PR comment, if any. Apply each one the source or a live run confirms.
@@ -32,7 +32,7 @@ Edit only `.factory/skills/qa-*/SKILL.md` (flow menus and Known Failure Modes) a
 The reply names one outcome:
 
 - **clean.** Every flow got source and live coverage. Nothing changed.
-- **changed.** One commit of corrections, each re-driven live, with every changed file re-read, and the edits a `/install-qa` rerun would overwrite listed.
+- **changed.** One commit of corrections, each re-driven live, with every changed file re-read.
 - **blocked.** Coverage or a fix could not finish. Say exactly what blocked it.
 
 It also lists flows covered, mapped and unmapped counts, unreachable prerequisites, confirmed drift, and product regressions found.
